@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Scratch Quest – Romantic Adventure</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+    <style>
+        /* ── RESET & ROOT ── */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --bg-primary: #0d0d0f;
+            --bg-secondary: #1a1a1f;
+            --bg-card: #24242b;
+            --bg-input: #2c2c35;
+            --text-primary: #f0eef2;
+            --text-secondary: #b0aeb8;
+            --accent: #ff6b8a;
+            --accent-hover: #ff4d73;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            --radius: 20px;
+            --transition: 0.3s ease;
+            --border-subtle: rgba(255, 255, 255, 0.06);
+        }
+        body.light {
+            --bg-primary: #f5f3f7;
+            --bg-secondary: #eae8ed;
+            --bg-card: #ffffff;
+            --bg-input: #f0eef3;
+            --text-primary: #1e1c22;
+            --text-secondary: #4a4850;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --border-subtle: rgba(0, 0, 0, 0.06);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            transition: background var(--transition), color var(--transition);
+        }
+
+        #app {
+            flex: 1;
+            padding: 20px 16px 90px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* ── FOOTER ── */
+        #main-footer {
+            background: var(--bg-secondary);
+            padding: 14px 20px;
+            border-top: 1px solid var(--border-subtle);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            transition: background var(--transition);
+        }
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        .footer-links a {
+            color: var(--text-secondary);
+            margin-left: 18px;
+            font-size: 1.2rem;
+            transition: color var(--transition);
+        }
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        /* ── PAGES ── */
+        .page {
+            display: none;
+            animation: fadeUp 0.4s ease;
+        }
+        .page.active {
+            display: block;
+        }
+        @keyframes fadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ── BUTTONS ── */
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 50px;
+            background: var(--accent);
+            color: #fff;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background var(--transition), transform 0.15s;
+            text-decoration: none;
+            box-shadow: 0 4px 14px rgba(255, 107, 138, 0.3);
+        }
+        .btn:hover {
+            background: var(--accent-hover);
+            transform: scale(1.02);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            box-shadow: none;
+        }
+        .btn-outline:hover {
+            background: var(--accent);
+            color: #fff;
+        }
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 0.85rem;
+        }
+        .btn-danger {
+            background: #e74c3c;
+            box-shadow: 0 4px 14px rgba(231, 76, 60, 0.3);
+        }
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+        .btn-success {
+            background: #2ecc71;
+            box-shadow: 0 4px 14px rgba(46, 204, 113, 0.3);
+        }
+        .btn-success:hover {
+            background: #27ae60;
+        }
+
+        /* ── CARDS ── */
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            box-shadow: var(--shadow);
+            transition: background var(--transition), box-shadow var(--transition);
+        }
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section-title i {
+            color: var(--accent);
+        }
+
+        /* ── HERO ── */
+        .hero {
+            text-align: center;
+            padding: 40px 0 30px;
+        }
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), #ffb3c6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin: 12px 0 24px;
+        }
+
+        /* ── CATEGORY TAGS ── */
+        .categories-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 24px 0 30px;
+        }
+        .cat-tag {
+            background: var(--bg-input);
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition);
+            border: 2px solid transparent;
+        }
+        .cat-tag:hover {
+            border-color: var(--accent);
+            transform: scale(1.05);
+        }
+        .cat-tag.active {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+
+        .random-section {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            align-items: center;
+            margin: 20px 0 30px;
+        }
+
+        .about-text {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 700px;
+        }
+
+        /* ── SCRATCH CANVAS ── */
+        .scratch-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            padding: 10px 0;
+        }
+        .canvas-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 420px;
+            aspect-ratio: 1 / 1;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            background: #1e1e26;
+        }
+        #scratchCanvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            touch-action: none;
+            cursor: pointer;
+        }
+        .card-info {
+            text-align: center;
+            width: 100%;
+            max-width: 420px;
+        }
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        .card-category {
+            color: var(--accent);
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .revealed-message {
+            font-size: 1.2rem;
+            margin: 12px 0;
+            padding: 16px;
+            background: var(--bg-input);
+            border-radius: 12px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.5s ease;
+        }
+        .revealed-message.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .play-controls {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* ── SETTINGS ── */
+        .settings-group {
+            margin: 24px 0;
+        }
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .setting-item span {
+            font-weight: 500;
+        }
+        .toggle {
+            position: relative;
+            width: 50px;
+            height: 28px;
+            background: var(--bg-input);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background var(--transition);
+        }
+        .toggle.active {
+            background: var(--accent);
+        }
+        .toggle::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 22px;
+            height: 22px;
+            background: #fff;
+            border-radius: 50%;
+            transition: transform var(--transition);
+        }
+        .toggle.active::after {
+            transform: translateX(22px);
+        }
+
+        /* ── CUSTOM CARD CREATOR ── */
+        .creator-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 16px;
+        }
+        @media (min-width: 768px) {
+            .creator-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            color: var(--text-secondary);
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 2px solid var(--border-subtle);
+            background: var(--bg-input);
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border var(--transition);
+            outline: none;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent);
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+        .form-group input[type="file"] {
+            padding: 10px 0;
+            border: none;
+            background: transparent;
+        }
+        .form-group input[type="file"]::file-selector-button {
+            padding: 8px 18px;
+            border-radius: 50px;
+            border: none;
+            background: var(--accent);
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background var(--transition);
+            margin-right: 12px;
+        }
+        .form-group input[type="file"]::file-selector-button:hover {
+            background: var(--accent-hover);
+        }
+
+        .image-preview {
+            margin-top: 10px;
+            width: 100%;
+            max-width: 200px;
+            aspect-ratio: 1 / 1;
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--bg-input);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed var(--border-subtle);
+        }
+        .image-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .image-preview .placeholder {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            text-align: center;
+            padding: 12px;
+        }
+
+        .custom-card-list {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .custom-card-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 14px 18px;
+            background: var(--bg-input);
+            border-radius: 12px;
+            transition: background var(--transition);
+        }
+        .custom-card-item:hover {
+            background: var(--bg-card);
+        }
+        .custom-card-item .thumb {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: var(--bg-primary);
+        }
+        .custom-card-item .thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .custom-card-item .info {
+            flex: 1;
+            min-width: 0;
+        }
+        .custom-card-item .info .title {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .custom-card-item .info .msg {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .custom-card-item .info .cat {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: var(--accent);
+            letter-spacing: 0.5px;
+        }
+        .custom-card-item .actions {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+        .custom-card-item .actions button {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 4px 8px;
+            border-radius: 8px;
+            transition: all var(--transition);
+        }
+        .custom-card-item .actions button:hover {
+            color: var(--accent);
+            background: rgba(255, 107, 138, 0.1);
+        }
+        .custom-card-item .actions button.delete:hover {
+            color: #e74c3c;
+            background: rgba(231, 76, 60, 0.1);
+        }
+
+        .empty-custom {
+            color: var(--text-secondary);
+            text-align: center;
+            padding: 30px 0;
+            font-style: italic;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .section-title {
+                font-size: 1.4rem;
+            }
+            .canvas-wrapper {
+                max-width: 100%;
+            }
+            .footer-links a {
+                margin-left: 12px;
+            }
+            .custom-card-item {
+                flex-wrap: wrap;
+            }
+            .custom-card-item .actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+        }
+        @media (min-width: 768px) {
+            .categories-grid {
+                gap: 16px;
+            }
+        }
+
+        code {
+            background: var(--bg-input);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: var(--accent);
+        }
+        .badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            background: var(--accent);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+
+    <footer id="main-footer">
+        <div class="footer-inner">
+            <p>&copy; 2026 <strong>Scratch Quest</strong> — Made with <i class="fas fa-heart" style="color: #ff6b8a;"></i></p>
+            <div class="footer-links">
+                <a href="#" data-nav="home"><i class="fas fa-home"></i></a>
+                <a href="#" data-nav="play"><i class="fas fa-gamepad"></i></a>
+                <a href="#" data-nav="customize"><i class="fas fa-pen-fancy"></i></a>
+                <a href="#" data-nav="settings"><i class="fas fa-cog"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ═══════════════════════════════════════════════════════════════
+        //  SCRATCH QUEST – with IMAGE UPLOAD & CUSTOM TEXT
+        // ═══════════════════════════════════════════════════════════════
+
+        // ── DEFAULT CARD DATA ──
+        const DEFAULT_CARDS = [
+            // Romantic (10)
+            { id: '1', title: 'Candlelit Dinner', category: 'Romantic',
+                hiddenMessage: 'Plan a candlelit dinner at home with their favourite meal.', difficulty: 'easy',
+                image: 'https://fastly.picsum.photos/id/216/200/200.jpg?hmac=7Weas8POu49YrmUyJ6tWdqVMx-hw6lryzl8HnHZBzjc',
+                dateCreated: Date.now() },
+            { id: '2', title: 'Love Letter', category: 'Romantic',
+                hiddenMessage: 'Write a handwritten love letter and hide it somewhere for them to find.',
+                difficulty: 'hard', image: '', dateCreated: Date.now() },
+            { id: '3', title: 'Sunrise Surprise', category: 'Romantic',
+                hiddenMessage: 'Wake up early to watch the sunrise together with a warm drink.', difficulty: 'medium',
+                image: '', dateCreated: Date.now() },
+            { id: '4', title: 'Photo Memory', category: 'Romantic',
+                hiddenMessage: 'Create a photo album of your favourite memories together.', difficulty: 'easy', image: '',
+                dateCreated: Date.now() },
+            { id: '5', title: 'Dance in the Dark', category: 'Romantic',
+                hiddenMessage: 'Turn off the lights, play soft music, and slow dance in the dark.', difficulty: 'easy',
+                image: '', dateCreated: Date.now() },
+            { id: '6', title: 'Secret Picnic', category: 'Romantic',
+                hiddenMessage: 'Pack a secret picnic and surprise them at their favourite park.', difficulty: 'medium',
+                image: '', dateCreated: Date.now() },
+            { id: '7', title: 'Message in a Bottle', category: 'Romantic',
+                hiddenMessage: 'Write a romantic message, put it in a bottle, and give it as a gift.', difficulty: 'hard',
+                image: '', dateCreated: Date.now() },
+            { id: '8', title: 'Spa Night', category: 'Romantic',
+                hiddenMessage: 'Set up a spa night with candles, oils, and massage.', difficulty: 'medium', image: '',
+                dateCreated: Date.now() },
+            { id: '9', title: 'Love Playlist', category: 'Romantic',
+                hiddenMessage: 'Create a personalised playlist of songs that remind you of them.', difficulty: 'easy',
+                image: '', dateCreated: Date.now() },
+            { id: '10', title: 'Stargazing Date', category: 'Romantic',
+                hiddenMessage: 'Drive to a remote spot, lie down, and count stars together.', difficulty: 'medium',
+                image: '', dateCreated: Date.now() },
+            // Date Ideas (10)
+            { id: '11', title: 'Sunset Walk', category: 'Date Ideas',
+                hiddenMessage: 'Take a sunset walk along the beach or a scenic trail.', difficulty: 'easy', image: '',
+                dateCreated: Date.now() },
+            { id: '12', title: 'Museum Date', category: 'Date Ideas',
+                hiddenMessage: 'Visit a museum or art gallery and discuss your favourite pieces.', difficulty: 'medium',
+                image: '', dateCreated: Date.now() },
+            { id: '13', title: 'Coffee Shop Hop', category: 'Date Ideas',
+                hiddenMessage: 'Visit three different coffee shops in one afternoon and rate each.', difficulty: 'easy',
+                image: '', dateCreated: Date.now() },
+            { id: '14', title: 'Bike Ride Adventure', category: 'Date Ideas',
+                hiddenMessage: 'Rent bikes and explore a new part of town together.', difficulty: 'medium', image: '',
+                dateCreated: Date.now() },
+            { id: '15', title: 'Cook Together', category: 'Date Ideas',
+                hiddenMessage: 'Choose a recipe you’ve never made and cook it together.', difficulty: 'hard', image: '',
+                dateCreated: Date.now() },
+            { id: '16', title: 'Mini Golf', category: 'Date Ideas',
+                hiddenMessage: 'Play a round of mini golf and keep score – loser buys dinner.', difficulty: 'easy',
+                image: '', dateCreated: Date.now() },
+            { id: '17', title: 'Bookstore Date', category: 'Date Ideas',
+                hiddenMessage: 'Spend an hour in a bookstore, pick a book for each other, and read a page aloud.',
+                difficulty: 'medium', image: '', dateCreated: Date.now() },
+            { id: '18', title: 'Kayaking', category: 'Date Ideas',
+                hiddenMessage: 'Rent a kayak or canoe and explore a nearby lake or river.', difficulty: 'hard', image: '',
+                dateCreated: Date.now() },
+            { id: '19', title: 'Drive-in Movie', category: 'Date Ideas',
+                hiddenMessage: 'Find a drive-in movie theatre or create your own with a projector.', difficulty: 'medium',
+                image: '', dateCreated: Date.now() },
+            { id: '20', title: 'Botanical Garden', category: 'Date Ideas',
+                hiddenMessage: 'Visit a botanical garden and take photos of the most beautiful flowers.',
+                difficulty: 'easy', image: '', dateCreated: Date.now() },
+            // Compliments (10)
+            { id: '21', title: 'You light up my world', category: 'Compliments',
+                hiddenMessage: 'Your smile is the best part of my day.', difficulty: 'easy', image: '',
+                dateCreated: Date.now() },
+            { id: '22', title: 'You are beautiful', category: 'Compliments',
+                hiddenMessage: 'You are more beautiful than a field of wildflowers in full bloom.', difficulty: 'easy',
+                image: '', dateCreated: Date.now() },
+            { id: '23', title: 'Kind Heart', category: 'Compliments',
+                hiddenMessage: 'Your kindness makes the world a better place – never change.', difficulty: 'easy',
+                image: '', dateCreated: Date.now() },
+            { id: '24', title: 'Inspiring', category: 'Compliments',
+                hiddenMessage: 'You inspire me to be a better person every single day.', difficulty: 'medium', image: '',
+                dateCreated: Date.now() },
+            { id: '25', title: 'Beautiful Mind', category: 'Compliments',
+                hiddenMessage: 'Your intelligence and creativity never cease to amaze me.', difficulty: 'medium',
+                image: '', dateCreated: Date.now() },
+            { id: '26', title: 'Stunning Laugh', category: 'Compliments',
+                hiddenMessage: 'Your laugh is my favourite sound in the world.', difficulty: 'easy', image: '',
+                dateCreated: Date.now() },
+            { id: '27', title: 'Strength', category: 'Compliments',
+                hiddenMessage: 'You are stronger than you think – I admire your resilience.', difficulty: 'hard',
+                image: '', dateCreated: Date.now() },
+            { id: '28', title: 'Warm Heart', category: 'Compliments',
+                hiddenMessage: 'You have the warmest heart – it’s a gift to everyone around you.', difficulty: 'easy',
+                image: '', dateCreated: Date.now() },
+            { id: '29', title: 'Adventurous Spirit', category: 'Compliments',
+                hiddenMessage: 'Your adventurous spirit makes life exciting and full of possibilities.',
+                difficulty: 'medium', image: '', dateCreated: Date.now() },
+            { id: '30', title: 'Radiant Smile', category: 'Compliments',
+                hiddenMessage: 'Your smile is like sunshine – it brightens everything around you.', difficulty: 'easy',
+                image: '', dateCreated: Date.now() },
+            // Conversation Starters (10)
+            { id: '31', title: 'Be a bird or a fish?', category: 'Conversation Starters',
+                hiddenMessage: 'If you could be a bird or a fish for a day, which would you choose and why?',
+                difficulty: 'medium', image: '', dateCreated: Date.now() },
+            { id: '32', title: 'Time Machine', category: 'Conversation Starters',
+                hiddenMessage: 'If you had a time machine, where would you go – past or future?', difficulty: 'easy',
+                image: '', dateCreated: Date.now() },
+            { id: '33', title: 'Superpower', category: 'Conversation Starters',
+                hiddenMessage: 'What superpower would you choose and how would you use it?', difficulty: 'easy',
+                image: '', dateCreated: Date.now() },
+            { id: '34', title: 'Desert Island', category: 'Conversation Starters',
+                hiddenMessage: 'If you were stranded on a desert island, what three things would you bring?',
+                difficulty: 'medium', image: '', dateCreated: Date.now() },
+            { id: '35', title: 'Famous Guest', category: 'Conversation Starters',
+                hiddenMessage: 'If you could have dinner with any famous person, living or dead, who would it be?',
+                difficulty: 'hard', image: '', dateCreated: Date.now() },
+            { id: '36', title: 'Life Motto', category: 'Conversation Starters',
+                hiddenMessage: 'What is your life motto and why does it resonate with you?', difficulty: 'medium',
+                image: '', dateCreated: Date.now() },
+            { id: '37', title: 'Alternative Career', category: 'Conversation Starters',
+                hiddenMessage: 'If you could switch careers with anyone for a month, who would you choose?',
+                difficulty: 'easy', image: '', dateCreated: Date.now() },
+            { id: '38', title: 'Dream Home', category: 'Conversation Starters',
+                hiddenMessage: 'Describe your dream home – location, style, and one must-have room.', difficulty: 'medium',
+                image: '', dateCreated: Date.now() },
+            { id: '39', title: 'Childhood Memory', category: 'Conversation Starters',
+                hiddenMessage: 'What is your favourite childhood memory that still makes you smile?', difficulty: 'easy',
+                image: '', dateCreated: Date.now() },
+            { id: '40', title: 'Bucket List', category: 'Conversation Starters',
+                hiddenMessage: 'What is the number one thing on your bucket list right now?', difficulty: 'medium',
+                image: '', dateCreated: Date.now() },
+            // Fun Challenges (10)
+            { id: '41', title: 'Karaoke Night', category: 'Fun Challenges',
+                hiddenMessage: 'Sing a duet karaoke song together, no matter how bad it sounds!', difficulty: 'medium',
+                image: '', dateCreated: Date.now() },
+            { id: '42', title: 'Dance in the Rain', category: 'Fun Challenges',
+                hiddenMessage: 'Next time it rains, go outside and dance together like nobody is watching.',
+                difficulty: 'hard', image: '', dateCreated: Date.now() },
+            { id: '43', title: 'Blindfold Taste Test', category: 'Fun Challenges',
+                hiddenMessage: 'Prepare a blindfold taste test with different foods and guess what they are.',
+                difficulty: 'easy', image: '', dateCreated: Date.now() },
+            { id: '44', title: 'DIY Scavenger Hunt', category: 'Fun Challenges',
+                hiddenMessage: 'Create a scavenger hunt around your home or neighbourhood with fun clues.',
+                difficulty: 'hard', image: '', dateCreated: Date.now() },
+            { id: '45', title: 'Pillow Fort', category: 'Fun Challenges',
+                hiddenMessage: 'Build the biggest pillow fort you can and camp out in it for the night.',
+                difficulty: 'easy', image: '', dateCreated: Date.now() },
+            { id: '46', title: 'Funny Face Contest', category: 'Fun Challenges',
+                hiddenMessage: 'Make each other laugh with the silliest faces – loser does the dishes!',
+                difficulty: 'easy', image: '', dateCreated: Date.now() },
+            { id: '47', title: 'Reverse Roles', category: 'Fun Challenges',
+                hiddenMessage: 'Spend an hour swapping roles – you act like them and they act like you.',
+                difficulty: 'medium', image: '', dateCreated: Date.now() },
+            { id: '48', title: 'DIY Pizza', category: 'Fun Challenges',
+                hiddenMessage: 'Make pizza from scratch together and compete for the best topping combo.',
+                difficulty: 'medium', image: '', dateCreated: Date.now() },
+            { id: '49', title: 'No Phone Hour', category: 'Fun Challenges',
+                hiddenMessage: 'Put away your phones for one hour and have an old‑fashioned conversation.',
+                difficulty: 'easy', image: '', dateCreated: Date.now() },
+            { id: '50', title: 'Improv Story', category: 'Fun Challenges',
+                hiddenMessage: 'Take turns building a story one sentence at a time – see where it goes!',
+                difficulty: 'medium', image: '', dateCreated: Date.now() }
+        ];
+
+        const DEFAULT_CATEGORIES = ['Romantic', 'Date Ideas', 'Compliments', 'Conversation Starters', 'Fun Challenges'];
+
+        // ── STATE ──
+        let cards = [];
+        let categories = [];
+        let settings = { theme: 'dark', sound: true };
+        let selectedCategory = 'All';
+        let currentCard = null;
+        let isRevealed = false;
+        let currentPage = 'home';
+
+        // ── Load from localStorage ──
+        function loadState() {
+            const saved = localStorage.getItem('scratchQuestData');
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    cards = parsed.cards || [];
+                    categories = parsed.categories || DEFAULT_CATEGORIES.slice();
+                    settings = parsed.settings || { theme: 'dark', sound: true };
+                    selectedCategory = parsed.selectedCategory || 'All';
+                    return;
+                } catch (e) { /* ignore */ }
+            }
+            // Fallback to defaults
+            cards = DEFAULT_CARDS.map(c => ({ ...c }));
+            categories = DEFAULT_CATEGORIES.slice();
+            settings = { theme: 'dark', sound: true };
+            selectedCategory = 'All';
+        }
+
+        function saveState() {
+            try {
+                localStorage.setItem('scratchQuestData', JSON.stringify({
+                    cards,
+                    categories,
+                    settings,
+                    selectedCategory
+                }));
+            } catch (e) { /* ignore */ }
+        }
+
+        loadState();
+
+        // ── SOUND ──
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+        }
+
+        function playScratchSound() {
+            if (!settings.sound) return;
+            try {
+                initAudio();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.frequency.value = 200 + Math.random() * 400;
+                osc.type = 'sawtooth';
+                gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.05);
+            } catch (e) { /* ignore */ }
+        }
+
+        function playRevealSound() {
+            if (!settings.sound) return;
+            try {
+                initAudio();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.frequency.value = 880;
+                osc.type = 'sine';
+                gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.3);
+                const osc2 = audioCtx.createOscillator();
+                const gain2 = audioCtx.createGain();
+                osc2.connect(gain2);
+                gain2.connect(audioCtx.destination);
+                osc2.frequency.value = 1100;
+                osc2.type = 'sine';
+                gain2.gain.setValueAtTime(0.15, audioCtx.currentTime + 0.1);
+                gain2.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
+                osc2.start(audioCtx.currentTime + 0.1);
+                osc2.stop(audioCtx.currentTime + 0.4);
+            } catch (e) { /* ignore */ }
+        }
+
+        // ── HELPERS ──
+        function getFilteredCards() {
+            if (selectedCategory === 'All') return cards.slice();
+            return cards.filter(c => c.category === selectedCategory);
+        }
+
+        function getRandomCardFromCategory(category) {
+            const pool = category === 'All' ? cards : cards.filter(c => c.category === category);
+            if (pool.length === 0) return null;
+            return pool[Math.floor(Math.random() * pool.length)];
+        }
+
+        function getNextCard() {
+            const pool = getFilteredCards();
+            if (pool.length === 0) return null;
+            if (pool.length === 1) return pool[0];
+            const filtered = pool.filter(c => c.id !== (currentCard ? currentCard.id : ''));
+            return filtered.length ? filtered[Math.floor(Math.random() * filtered.length)] : pool[Math.floor(Math
+            .random() * pool.length)];
+        }
+
+        function generateId() {
+            return Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+        }
+
+        // ── NAVIGATION ──
+        function navigate(page) {
+            currentPage = page;
+            render();
+        }
+
+        // ── RENDER ──
+        function render() {
+            document.body.className = settings.theme === 'light' ? 'light' : '';
+            let html = '';
+            switch (currentPage) {
+                case 'home':
+                    html = renderHome();
+                    break;
+                case 'play':
+                    html = renderPlay();
+                    break;
+                case 'customize':
+                    html = renderCustomize();
+                    break;
+                case 'settings':
+                    html = renderSettings();
+                    break;
+                default:
+                    html = renderHome();
+            }
+            document.getElementById('app').innerHTML = html;
+            attachEvents();
+            if (currentPage === 'play') initScratchCard();
+            saveState();
+        }
+
+        // ── HOME ──
+        function renderHome() {
+            const catsHtml = categories.map(c =>
+                `<span class="cat-tag ${selectedCategory === c ? 'active' : ''}" data-cat="${c}">${c}</span>`
+            ).join('');
+            return `
+                <div class="page active">
+                    <section class="hero">
+                        <h1>Scratch Quest</h1>
+                        <p>Pick a category to spin a random card and start scratching!</p>
+                    </section>
+                    <section>
+                        <div class="section-title"><i class="fas fa-tags"></i> Categories</div>
+                        <div class="categories-grid">${catsHtml}</div>
+                        <p style="color: var(--text-secondary); font-size:0.9rem; margin-top: 4px;">
+                            <i class="fas fa-info-circle"></i> Click a category to spin a random card.
+                        </p>
+                    </section>
+                    <section class="random-section">
+                        <button class="btn btn-outline" id="randomCardBtn"><i class="fas fa-dice"></i> Random Card</button>
+                        <span style="color: var(--text-secondary); font-size:0.9rem;">
+                            ${getFilteredCards().length} cards in <strong>${selectedCategory}</strong>
+                        </span>
+                    </section>
+                    <section class="about-text">
+                        <div class="section-title"><i class="fas fa-heart"></i> About</div>
+                        <p>Scratch Quest brings you romantic challenges, date ideas, compliments, conversation starters, and fun challenges.</p>
+                        <p style="margin-top:12px;">
+                            <i class="fas fa-pen-fancy" style="color:var(--accent);"></i>
+                            Head to <strong>Customize</strong> to add your own pictures and secret messages!
+                        </p>
+                        <p style="margin-top:8px; font-size:0.85rem;">
+                            💡 Your custom cards are saved in your browser.
+                        </p>
+                    </section>
+                </div>
+            `;
+        }
+
+        // ── PLAY ──
+        function renderPlay() {
+            const pool = getFilteredCards();
+            if (pool.length === 0) {
+                return `
+                    <div class="page active">
+                        <div style="text-align:center; padding:60px 20px;">
+                            <i class="fas fa-inbox" style="font-size:3rem; color:var(--text-secondary);"></i>
+                            <h3 style="margin-top:16px;">No cards in this category</h3>
+                            <p style="color:var(--text-secondary);">Try a different category or add your own!</p>
+                            <button class="btn" style="margin-top:16px;" onclick="navigate('customize')">
+                                <i class="fas fa-plus"></i> Add Custom Card
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+            if (!currentCard || !pool.some(c => c.id === currentCard.id)) {
+                currentCard = pool[Math.floor(Math.random() * pool.length)];
+            }
+            isRevealed = false;
+            return `
+                <div class="page active">
+                    <div class="scratch-container">
+                        <div class="canvas-wrapper">
+                            <canvas id="scratchCanvas" width="500" height="500"></canvas>
+                        </div>
+                        <div class="card-info">
+                            <div class="card-category">${currentCard.category}</div>
+                            <div class="card-title">${currentCard.title}</div>
+                            <div class="revealed-message" id="revealedMessage">${currentCard.hiddenMessage || '💕 No message set'}</div>
+                        </div>
+                        <div class="play-controls">
+                            <button class="btn" id="nextCardBtn"><i class="fas fa-arrow-right"></i> Next Card</button>
+                            <button class="btn btn-outline btn-sm" id="resetCardBtn"><i class="fas fa-undo"></i> Reset</button>
+                        </div>
+                        <div style="margin-top:8px; font-size:0.8rem; color:var(--text-secondary);">
+                            <i class="fas fa-info-circle"></i> Scratch the card to reveal the message
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ── CUSTOMIZE ──
+        function renderCustomize() {
+            const customCards = cards.filter(c => c.isCustom);
+            const categoryOptions = categories.map(c =>
+                `<option value="${c}">${c}</option>`
+            ).join('');
+
+            let listHtml = '';
+            if (customCards.length === 0) {
+                listHtml = `<div class="empty-custom">✨ No custom cards yet. Create one below!</div>`;
+            } else {
+                listHtml = customCards.map(c => `
+                    <div class="custom-card-item" data-id="${c.id}">
+                        <div class="thumb">
+                            ${c.image ? `<img src="${c.image}" alt="${c.title}" />` :
+                            `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--bg-input);color:var(--text-secondary);font-size:1.5rem;">❤️</div>`}
+                        </div>
+                        <div class="info">
+                            <div class="title">${c.title}</div>
+                            <div class="msg">${c.hiddenMessage || 'No message'}</div>
+                            <div class="cat">${c.category}</div>
+                        </div>
+                        <div class="actions">
+                            <button class="play-btn" data-id="${c.id}" title="Play this card"><i class="fas fa-play"></i></button>
+                            <button class="delete" data-id="${c.id}" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            return `
+                <div class="page active">
+                    <div class="section-title"><i class="fas fa-pen-fancy"></i> Customize</div>
+                    <p style="color:var(--text-secondary); margin-bottom:20px;">
+                        Upload your own images and write secret messages to create personalised scratch cards.
+                    </p>
+
+                    <div class="card">
+                        <h3 style="margin-bottom:16px;"><i class="fas fa-plus-circle" style="color:var(--accent);"></i> Create New Card</h3>
+                        <div class="creator-grid">
+                            <div>
+                                <div class="form-group">
+                                    <label>Card Title *</label>
+                                    <input type="text" id="customTitle" placeholder="e.g. Our Favourite Place" maxlength="60" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Category *</label>
+                                    <select id="customCategory">${categoryOptions}</select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Secret Message *</label>
+                                    <textarea id="customMessage" placeholder="Write the message that appears when scratched..." rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="form-group">
+                                    <label>Upload Image</label>
+                                    <input type="file" id="customImageInput" accept="image/*" />
+                                    <div class="image-preview" id="imagePreview">
+                                        <div class="placeholder"><i class="fas fa-image" style="font-size:2rem;display:block;margin-bottom:6px;"></i>No image selected</div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-success" id="addCustomCardBtn" style="width:100%;">
+                                    <i class="fas fa-plus"></i> Add Card
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top:28px;">
+                        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+                            <h3><i class="fas fa-list" style="color:var(--accent);"></i> Your Custom Cards (${customCards.length})</h3>
+                            ${customCards.length > 0 ? `<button class="btn btn-danger btn-sm" id="clearCustomBtn"><i class="fas fa-trash"></i> Clear All</button>` : ''}
+                        </div>
+                        <div class="custom-card-list">${listHtml}</div>
+                    </div>
+
+                    <div style="margin-top:20px; padding:16px; background:var(--bg-card); border-radius:12px; font-size:0.85rem; color:var(--text-secondary);">
+                        <i class="fas fa-info-circle"></i>
+                        Your custom cards are saved in your browser and will appear alongside the default cards.
+                        <span class="badge" style="margin-left:8px;">saved locally</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ── SETTINGS ──
+        function renderSettings() {
+            const themeIcon = settings.theme === 'dark' ? 'fa-moon' : 'fa-sun';
+            const soundIcon = settings.sound ? 'fa-volume-up' : 'fa-volume-mute';
+            const totalCards = cards.length;
+            const customCount = cards.filter(c => c.isCustom).length;
+            return `
+                <div class="page active">
+                    <div class="section-title"><i class="fas fa-cog"></i> Settings</div>
+                    <div class="settings-group card">
+                        <div class="setting-item">
+                            <span><i class="fas ${themeIcon}"></i> Theme</span>
+                            <div class="toggle ${settings.theme === 'light' ? 'active' : ''}" id="themeToggle"></div>
+                        </div>
+                        <div class="setting-item">
+                            <span><i class="fas ${soundIcon}"></i> Sound Effects</span>
+                            <div class="toggle ${settings.sound ? 'active' : ''}" id="soundToggle"></div>
+                        </div>
+                        <div class="setting-item" style="border-bottom:none; padding-bottom:4px;">
+                            <span><i class="fas fa-layer-group"></i> Total Cards</span>
+                            <span style="color:var(--accent);">${totalCards} <span style="color:var(--text-secondary);font-weight:400;">(${customCount} custom)</span></span>
+                        </div>
+                    </div>
+                    <div style="margin-top:20px; padding:16px; background:var(--bg-card); border-radius:12px; font-size:0.8rem; color:var(--text-secondary);">
+                        <i class="fas fa-database"></i> All data is stored locally in your browser.
+                        <button class="btn btn-danger btn-sm" style="margin-top:10px;" id="resetAllBtn">
+                            <i class="fas fa-undo-alt"></i> Reset to Default Cards
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ── EVENTS ──
+        function attachEvents() {
+            // Navigation
+            document.querySelectorAll('[data-nav]').forEach(el => {
+                el.onclick = (e) => { e.preventDefault();
+                    navigate(el.dataset.nav); };
+            });
+
+            // Home: random card
+            document.getElementById('randomCardBtn')?.addEventListener('click', () => {
+                const pool = getFilteredCards();
+                if (pool.length) { currentCard = pool[Math.floor(Math.random() * pool.length)];
+                    navigate('play'); } else alert('No cards available in this category.');
+            });
+
+            // Home: category tags
+            document.querySelectorAll('.cat-tag').forEach(el => {
+                el.onclick = () => {
+                    const cat = el.dataset.cat;
+                    selectedCategory = cat;
+                    const card = getRandomCardFromCategory(cat);
+                    if (card) { currentCard = card;
+                        navigate('play'); } else alert(`No cards in "${cat}" category.`);
+                };
+            });
+
+            // Settings: theme toggle
+            document.getElementById('themeToggle')?.addEventListener('click', () => {
+                settings.theme = settings.theme === 'dark' ? 'light' : 'dark';
+                saveState();
+                render();
+            });
+
+            // Settings: sound toggle
+            document.getElementById('soundToggle')?.addEventListener('click', () => {
+                settings.sound = !settings.sound;
+                saveState();
+                render();
+            });
+
+            // Settings: reset all
+            document.getElementById('resetAllBtn')?.addEventListener('click', () => {
+                if (confirm('Reset all cards to defaults? Your custom cards will be lost.')) {
+                    cards = DEFAULT_CARDS.map(c => ({ ...c }));
+                    categories = DEFAULT_CATEGORIES.slice();
+                    selectedCategory = 'All';
+                    currentCard = null;
+                    saveState();
+                    render();
+                }
+            });
+
+            // Play: next card
+            document.getElementById('nextCardBtn')?.addEventListener('click', () => {
+                const next = getNextCard();
+                if (next) { currentCard = next;
+                    navigate('play'); } else alert('No more cards in this category.');
+            });
+
+            // Play: reset
+            document.getElementById('resetCardBtn')?.addEventListener('click', () => navigate('play'));
+
+            // ── CUSTOMIZE EVENTS ──
+
+            // Image preview
+            const fileInput = document.getElementById('customImageInput');
+            const preview = document.getElementById('imagePreview');
+            if (fileInput && preview) {
+                fileInput.addEventListener('change', (e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (ev) => {
+                            preview.innerHTML = `<img src="${ev.target.result}" alt="Preview" />`;
+                        };
+                        reader.readAsDataURL(file);
+                    } else {
+                        preview.innerHTML =
+                            `<div class="placeholder"><i class="fas fa-image" style="font-size:2rem;display:block;margin-bottom:6px;"></i>No image selected</div>`;
+                    }
+                });
+            }
+
+            // Add custom card
+            document.getElementById('addCustomCardBtn')?.addEventListener('click', () => {
+                const title = document.getElementById('customTitle').value.trim();
+                const category = document.getElementById('customCategory').value;
+                const message = document.getElementById('customMessage').value.trim();
+                const fileInput2 = document.getElementById('customImageInput');
+                const file = fileInput2.files[0];
+
+                if (!title) { alert('Please enter a card title.'); return; }
+                if (!message) { alert('Please enter a secret message.'); return; }
+
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    const imageData = ev.target.result;
+                    const newCard = {
+                        id: 'custom_' + generateId(),
+                        title: title,
+                        category: category,
+                        hiddenMessage: message,
+                        difficulty: 'custom',
+                        image: imageData || '',
+                        dateCreated: Date.now(),
+                        isCustom: true
+                    };
+                    cards.push(newCard);
+                    if (!categories.includes(category)) {
+                        categories.push(category);
+                    }
+                    saveState();
+                    // Clear form
+                    document.getElementById('customTitle').value = '';
+                    document.getElementById('customMessage').value = '';
+                    fileInput2.value = '';
+                    if (preview) {
+                        preview.innerHTML =
+                            `<div class="placeholder"><i class="fas fa-image" style="font-size:2rem;display:block;margin-bottom:6px;"></i>No image selected</div>`;
+                    }
+                    render();
+                    // Re-attach custom events after render
+                    attachCustomEvents();
+                };
+                if (file) {
+                    reader.readAsDataURL(file);
+                } else {
+                    // No image, just add the card
+                    const newCard = {
+                        id: 'custom_' + generateId(),
+                        title: title,
+                        category: category,
+                        hiddenMessage: message,
+                        difficulty: 'custom',
+                        image: '',
+                        dateCreated: Date.now(),
+                        isCustom: true
+                    };
+                    cards.push(newCard);
+                    if (!categories.includes(category)) {
+                        categories.push(category);
+                    }
+                    saveState();
+                    document.getElementById('customTitle').value = '';
+                    document.getElementById('customMessage').value = '';
+                    fileInput2.value = '';
+                    if (preview) {
+                        preview.innerHTML =
+                            `<div class="placeholder"><i class="fas fa-image" style="font-size:2rem;display:block;margin-bottom:6px;"></i>No image selected</div>`;
+                    }
+                    render();
+                    attachCustomEvents();
+                }
+            });
+
+            // Custom card actions (play & delete) - attached after render
+            attachCustomEvents();
+
+            // Clear all custom
+            document.getElementById('clearCustomBtn')?.addEventListener('click', () => {
+                if (confirm('Delete ALL custom cards?')) {
+                    cards = cards.filter(c => !c.isCustom);
+                    saveState();
+                    render();
+                    attachCustomEvents();
+                }
+            });
+        }
+
+        // ── CUSTOM CARD EVENTS (re-attach after re-render) ──
+        function attachCustomEvents() {
+            document.querySelectorAll('.custom-card-item .play-btn').forEach(btn => {
+                btn.onclick = (e) => {
+                    e.stopPropagation();
+                    const id = btn.dataset.id;
+                    const card = cards.find(c => c.id === id);
+                    if (card) { currentCard = card;
+                        navigate('play'); }
+                };
+            });
+            document.querySelectorAll('.custom-card-item .delete').forEach(btn => {
+                btn.onclick = (e) => {
+                    e.stopPropagation();
+                    const id = btn.dataset.id;
+                    if (confirm('Delete this custom card?')) {
+                        cards = cards.filter(c => c.id !== id);
+                        saveState();
+                        render();
+                        attachCustomEvents();
+                    }
+                };
+            });
+        }
+
+        // ── SCRATCH CANVAS ──
+        let canvas, ctx, canvasWidth, canvasHeight;
+        let isDrawing = false;
+        let revealPercent = 0;
+        let backgroundImage = null;
+        let imageLoaded = false;
+
+        function initScratchCard() {
+            canvas = document.getElementById('scratchCanvas');
+            if (!canvas) return;
+            ctx = canvas.getContext('2d');
+            canvasWidth = canvas.width;
+            canvasHeight = canvas.height;
+
+            const card = currentCard;
+            if (!card) return;
+
+            const imgSrc = card.image && card.image.trim() !== '' ? card.image : null;
+            const img = new Image();
+            img.crossOrigin = 'Anonymous';
+
+            img.onload = function() {
+                backgroundImage = img;
+                imageLoaded = true;
+                drawCard();
+            };
+
+            img.onerror = function() {
+                backgroundImage = null;
+                imageLoaded = false;
+                drawCard();
+            };
+
+            if (imgSrc) {
+                img.src = imgSrc;
+            } else {
+                imageLoaded = false;
+                drawCard();
+            }
+
+            canvas.addEventListener('mousedown', startScratch);
+            canvas.addEventListener('mousemove', scratch);
+            canvas.addEventListener('mouseup', endScratch);
+            canvas.addEventListener('mouseleave', endScratch);
+            canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
+            canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+            canvas.addEventListener('touchend', endScratch, { passive: false });
+
+            isRevealed = false;
+            const msgEl = document.getElementById('revealedMessage');
+            if (msgEl) msgEl.classList.remove('show');
+            canvas.style.pointerEvents = 'auto';
+        }
+
+        function drawCard() {
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+            let drawSuccess = false;
+            if (imageLoaded && backgroundImage) {
+                try {
+                    const img = backgroundImage;
+                    const imgAspect = img.width / img.height;
+                    const canvasAspect = canvasWidth / canvasHeight;
+                    let drawW, drawH, offsetX, offsetY;
+                    if (imgAspect > canvasAspect) {
+                        drawW = canvasWidth;
+                        drawH = canvasWidth / imgAspect;
+                        offsetX = 0;
+                        offsetY = (canvasHeight - drawH) / 2;
+                    } else {
+                        drawH = canvasHeight;
+                        drawW = canvasHeight * imgAspect;
+                        offsetX = (canvasWidth - drawW) / 2;
+                        offsetY = 0;
+                    }
+                    ctx.drawImage(img, offsetX, offsetY, drawW, drawH);
+                    drawSuccess = true;
+                } catch (e) { /* fall through */ }
+            }
+
+            if (!drawSuccess) {
+                const grad = ctx.createLinearGradient(0, 0, canvasWidth, canvasHeight);
+                grad.addColorStop(0, '#ff9a9e');
+                grad.addColorStop(0.5, '#fecfef');
+                grad.addColorStop(1, '#fdfcfb');
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+                ctx.fillStyle = 'rgba(255,107,138,0.25)';
+                ctx.font = '120px "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('❤️', canvasWidth / 2, canvasHeight / 2);
+                // Fallback overlay
+                ctx.fillStyle = 'rgba(255,107,138,0.15)';
+                ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+            }
+
+            // ── Scratch overlay ──
+            ctx.globalCompositeOperation = 'source-over';
+            const overlayGrad = ctx.createLinearGradient(0, 0, canvasWidth, canvasHeight);
+            overlayGrad.addColorStop(0, '#b8b0a8');
+            overlayGrad.addColorStop(0.3, '#d0c8c0');
+            overlayGrad.addColorStop(0.6, '#a09890');
+            overlayGrad.addColorStop(1, '#c8c0b8');
+            ctx.fillStyle = overlayGrad;
+            ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+
+            // Texture noise
+            for (let i = 0; i < 1500; i++) {
+                const x = Math.random() * canvasWidth;
+                const y = Math.random() * canvasHeight;
+                const size = 1 + Math.random() * 3;
+                const alpha = 0.05 + Math.random() * 0.15;
+                ctx.fillStyle = `rgba(80,70,60,${alpha})`;
+                ctx.beginPath();
+                ctx.arc(x, y, size, 0, 2 * Math.PI);
+                ctx.fill();
+            }
+            ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+            ctx.lineWidth = 2;
+            for (let i = 0; i < 20; i++) {
+                ctx.beginPath();
+                ctx.moveTo(Math.random() * canvasWidth, Math.random() * canvasHeight);
+                ctx.lineTo(Math.random() * canvasWidth, Math.random() * canvasHeight);
+                ctx.stroke();
+            }
+
+            ctx.fillStyle = '#4a3f38';
+            ctx.font = 'bold 28px Inter, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.shadowColor = 'rgba(255,255,255,0.2)';
+            ctx.shadowBlur = 6;
+            ctx.fillText('✦ SCRATCH ✦', canvasWidth / 2, canvasHeight / 2 - 10);
+            ctx.shadowBlur = 0;
+            ctx.font = '14px Inter, sans-serif';
+            ctx.fillStyle = '#6a5f58';
+            ctx.fillText('drag to reveal', canvasWidth / 2, canvasHeight / 2 + 40);
+        }
+
+        function getCanvasCoords(e) {
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            let clientX, clientY;
+            if (e.touches) { clientX = e.touches[0].clientX;
+                clientY = e.touches[0].clientY; } else { clientX = e.clientX;
+                clientY = e.clientY; }
+            const x = (clientX - rect.left) * scaleX;
+            const y = (clientY - rect.top) * scaleY;
+            if (x < 0 || x > canvas.width || y < 0 || y > canvas.height) return null;
+            return { x, y };
+        }
+
+        function startScratch(e) { e.preventDefault(); if (isRevealed) return;
+            isDrawing = true;
+            scratch(e); }
+
+        function scratch(e) {
+            if (!isDrawing || isRevealed) return;
+            e.preventDefault();
+            const pos = getCanvasCoords(e);
+            if (!pos) return;
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.beginPath();
+            ctx.arc(pos.x, pos.y, 28, 0, 2 * Math.PI);
+            ctx.fill();
+            if (Math.random() < 0.12) playScratchSound();
+            checkReveal();
+        }
+
+        function endScratch(e) { if (isDrawing) { isDrawing = false;
+                checkReveal(); } }
+
+        function handleTouchStart(e) { e.preventDefault(); const touch = e.touches[0];
+            canvas.dispatchEvent(new MouseEvent('mousedown', { clientX: touch.clientX, clientY: touch.clientY })); }
+
+        function handleTouchMove(e) { e.preventDefault(); const touch = e.touches[0];
+            canvas.dispatchEvent(new MouseEvent('mousemove', { clientX: touch.clientX, clientY: touch.clientY })); }
+
+        function checkReveal() {
+            if (isRevealed) return;
+            const imageData = ctx.getImageData(0, 0, canvasWidth, canvasHeight);
+            const data = imageData.data;
+            let transparent = 0;
+            const total = data.length / 4;
+            for (let i = 3; i < data.length; i += 4) { if (data[i] < 128) transparent++; }
+            revealPercent = transparent / total;
+            if (revealPercent > 0.40) {
+                isRevealed = true;
+                fadeOutOverlay();
+                const msgEl = document.getElementById('revealedMessage');
+                if (msgEl) msgEl.classList.add('show');
+                playRevealSound();
+                canvas.style.pointerEvents = 'none';
+            }
+        }
+
+        function fadeOutOverlay() {
+            let opacity = 1.0;
+            const step = () => {
+                if (opacity <= 0) {
+                    ctx.globalCompositeOperation = 'destination-out';
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+                    ctx.globalCompositeOperation = 'source-over';
+                    return;
+                }
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.fillStyle = `rgba(255,255,255,${0.1})`;
+                ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+                opacity -= 0.1;
+                requestAnimationFrame(step);
+            };
+            step();
+        }
+
+        // ── START ──
+        navigate('home');
+    </script>
+</body>
+</html>
