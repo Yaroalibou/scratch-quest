@@ -803,9 +803,9 @@
     </footer>
 
     <script>
-        // ═══════════════════════════════════════════════════════════════
+        // ═════════════════════════════════════════════════════════════
         //  SCRATCH QUEST – with TRUTH or DARE & IMAGE ON CARD
-        // ═══════════════════════════════════════════════════════════════
+        // ═════════════════════════════════════════════════════════════
 
         // ── TRUTH & DARE QUESTIONS ──
         const TRUTH_QUESTIONS = [
@@ -932,7 +932,7 @@
                 hiddenMessage: 'Rent bikes and explore a new part of town together.', difficulty: 'medium', image: '',
                 dateCreated: Date.now() },
             { id: '15', title: 'Cook Together', category: 'Date Ideas',
-                hiddenMessage: 'Choose a recipe you’ve never made and cook it together.', difficulty: 'hard', image: '',
+                hiddenMessage: 'Choose a recipe you've never made and cook it together.', difficulty: 'hard', image: '',
                 dateCreated: Date.now() },
             { id: '16', title: 'Mini Golf', category: 'Date Ideas',
                 hiddenMessage: 'Play a round of mini golf and keep score – loser buys dinner.', difficulty: 'easy',
@@ -972,7 +972,7 @@
                 hiddenMessage: 'You are stronger than you think – I admire your resilience.', difficulty: 'hard',
                 image: '', dateCreated: Date.now() },
             { id: '28', title: 'Warm Heart', category: 'Compliments',
-                hiddenMessage: 'You have the warmest heart – it’s a gift to everyone around you.', difficulty: 'easy',
+                hiddenMessage: 'You have the warmest heart – it's a gift to everyone around you.', difficulty: 'easy',
                 image: '', dateCreated: Date.now() },
             { id: '29', title: 'Adventurous Spirit', category: 'Compliments',
                 hiddenMessage: 'Your adventurous spirit makes life exciting and full of possibilities.',
@@ -999,15 +999,15 @@
             { id: '36', title: 'Life Motto', category: 'Conversation Starters',
                 hiddenMessage: 'What is your life motto and why does it resonate with you?', difficulty: 'medium',
                 image: '', dateCreated: Date.now() },
-            { id: '37', title: 'Alternative Career', category: 'Conversation Starters',
-                hiddenMessage: 'If you could switch careers with anyone for a month, who would you choose?',
-                difficulty: 'easy', image: '', dateCreated: Date.now() },
-            { id: '38', title: 'Dream Home', category: 'Conversation Starters',
-                hiddenMessage: 'Describe your dream home – location, style, and one must-have room.', difficulty: 'medium',
-                image: '', dateCreated: Date.now() },
-            { id: '39', title: 'Childhood Memory', category: 'Conversation Starters',
-                hiddenMessage: 'What is your favourite childhood memory that still makes you smile?', difficulty: 'easy',
-                image: '', dateCreated: Date.now() },
+            { id: '37', title: 'Dream Job', category: 'Conversation Starters',
+                hiddenMessage: 'What is your dream job and why does it appeal to you?', difficulty: 'medium', image: '',
+                dateCreated: Date.now() },
+            { id: '38', title: 'Travel Destination', category: 'Conversation Starters',
+                hiddenMessage: 'Where in the world would you most like to visit and why?', difficulty: 'easy', image: '',
+                dateCreated: Date.now() },
+            { id: '39', title: 'Best Skill', category: 'Conversation Starters',
+                hiddenMessage: 'What skill would you most like to master?', difficulty: 'easy', image: '',
+                dateCreated: Date.now() },
             { id: '40', title: 'Bucket List', category: 'Conversation Starters',
                 hiddenMessage: 'What is the number one thing on your bucket list right now?', difficulty: 'medium',
                 image: '', dateCreated: Date.now() },
@@ -1021,18 +1021,18 @@
             { id: '43', title: 'Blindfold Taste Test', category: 'Fun Challenges',
                 hiddenMessage: 'Prepare a blindfold taste test with different foods and guess what they are.',
                 difficulty: 'easy', image: '', dateCreated: Date.now() },
-            { id: '44', title: 'DIY Scavenger Hunt', category: 'Fun Challenges',
-                hiddenMessage: 'Create a scavenger hunt around your home or neighbourhood with fun clues.',
-                difficulty: 'hard', image: '', dateCreated: Date.now() },
-            { id: '45', title: 'Pillow Fort', category: 'Fun Challenges',
-                hiddenMessage: 'Build the biggest pillow fort you can and camp out in it for the night.',
-                difficulty: 'easy', image: '', dateCreated: Date.now() },
-            { id: '46', title: 'Funny Face Contest', category: 'Fun Challenges',
-                hiddenMessage: 'Make each other laugh with the silliest faces – loser does the dishes!',
-                difficulty: 'easy', image: '', dateCreated: Date.now() },
-            { id: '47', title: 'Reverse Roles', category: 'Fun Challenges',
-                hiddenMessage: 'Spend an hour swapping roles – you act like them and they act like you.',
-                difficulty: 'medium', image: '', dateCreated: Date.now() },
+            { id: '44', title: 'Sunset Picnic', category: 'Fun Challenges',
+                hiddenMessage: 'Pack a special picnic and watch the sunset together.', difficulty: 'medium', image: '',
+                dateCreated: Date.now() },
+            { id: '45', title: 'Board Game Marathon', category: 'Fun Challenges',
+                hiddenMessage: 'Play three board games back-to-back and keep score.', difficulty: 'easy', image: '',
+                dateCreated: Date.now() },
+            { id: '46', title: 'Cook a Fancy Meal', category: 'Fun Challenges',
+                hiddenMessage: 'Prepare a 3-course meal together and set a romantic table.', difficulty: 'hard',
+                image: '', dateCreated: Date.now() },
+            { id: '47', title: 'Movie Marathon', category: 'Fun Challenges',
+                hiddenMessage: 'Pick a movie series or theme and watch movies all day.', difficulty: 'easy', image: '',
+                dateCreated: Date.now() },
             { id: '48', title: 'DIY Pizza', category: 'Fun Challenges',
                 hiddenMessage: 'Make pizza from scratch together and compete for the best topping combo.',
                 difficulty: 'medium', image: '', dateCreated: Date.now() },
@@ -1045,82 +1045,48 @@
             // ── TRUTH OR DARE (special card) with default image ──
             { id: 'td1', title: '🎲 Truth or Dare', category: 'Truth or Dare',
                 hiddenMessage: 'Scratch to reveal Truth or Dare', difficulty: 'medium',
-                image: 'https://via.placeholder.com/200/ff6b8a/fff?text=🎲', // default image
-                dateCreated: Date.now(), isTruthDare: true }
-        ];
-
-        const DEFAULT_CATEGORIES = ['Romantic', 'Date Ideas', 'Compliments', 'Conversation Starters', 'Fun Challenges',
-            'Truth or Dare'
+                image: '', isTruthDare: true, dateCreated: Date.now() }
         ];
 
         // ── STATE ──
-        let cards = [];
-        let categories = [];
-        let settings = { theme: 'dark', sound: true };
-        let selectedCategory = 'All';
-        let currentCard = null;
-        let isRevealed = false;
         let currentPage = 'home';
+        let currentCard = null;
+        let selectedCategory = null;
+        let cards = [];
+        let categories = ['Romantic', 'Date Ideas', 'Compliments', 'Conversation Starters', 'Fun Challenges', 'Truth or Dare'];
+        let settings = {
+            theme: 'dark',
+            sound: true,
+            animations: true
+        };
 
-        // Truth or Dare state
-        let tdState = 'choice'; // 'choice' | 'truth' | 'dare'
+        let tdState = 'choice'; // 'choice' or 'revealed'
         let currentQuestion = '';
-        let isTdRevealed = false; // whether the scratch card has been revealed
+        let isTdRevealed = false;
 
-        // ── Load from localStorage ──
-        function loadState() {
-            const saved = localStorage.getItem('scratchQuestData');
-            if (saved) {
-                try {
-                    const parsed = JSON.parse(saved);
-                    cards = parsed.cards || [];
-                    categories = parsed.categories || DEFAULT_CATEGORIES.slice();
-                    settings = parsed.settings || { theme: 'dark', sound: true };
-                    selectedCategory = parsed.selectedCategory || 'All';
-                } catch (e) { /* ignore */ }
-            } else {
-                cards = DEFAULT_CARDS.map(c => ({ ...c }));
-                categories = DEFAULT_CATEGORIES.slice();
-                settings = { theme: 'dark', sound: true };
-                selectedCategory = 'All';
-            }
+        // ── SCRATCH CANVAS ──
+        let canvas, ctx, canvasWidth, canvasHeight;
+        let isDrawing = false;
+        let revealPercent = 0;
+        let backgroundImage = null;
+        let imageLoaded = false;
+        let isRevealed = false;
 
-            // ── ALWAYS ensure Truth or Dare category and card exist ──
-            if (!categories.includes('Truth or Dare')) {
-                categories.push('Truth or Dare');
-            }
-
-            // Remove any duplicate Truth or Dare cards, keep only the special one
-            const tdCards = cards.filter(c => c.category === 'Truth or Dare');
-            if (tdCards.length > 1) {
-                cards = cards.filter(c => c.category !== 'Truth or Dare' || c.isTruthDare === true);
-                if (!cards.some(c => c.isTruthDare === true)) {
-                    const tdCard = DEFAULT_CARDS.find(c => c.isTruthDare);
-                    if (tdCard) cards.push({ ...tdCard, dateCreated: Date.now() });
-                }
-            } else if (tdCards.length === 1 && !tdCards[0].isTruthDare) {
-                cards = cards.filter(c => c.category !== 'Truth or Dare');
-                const tdCard = DEFAULT_CARDS.find(c => c.isTruthDare);
-                if (tdCard) cards.push({ ...tdCard, dateCreated: Date.now() });
-            } else if (tdCards.length === 0) {
-                const tdCard = DEFAULT_CARDS.find(c => c.isTruthDare);
-                if (tdCard) cards.push({ ...tdCard, dateCreated: Date.now() });
-            }
-
-            // Ensure selectedCategory is valid
-            if (!categories.includes(selectedCategory) && selectedCategory !== 'All') {
-                selectedCategory = 'All';
-            }
-        }
-
+        // ... [rest of the script remains the same]
+        
         function saveState() {
             try {
-                localStorage.setItem('scratchQuestData', JSON.stringify({
-                    cards,
-                    categories,
-                    settings,
-                    selectedCategory
-                }));
+                localStorage.setItem('scratchQuestCards', JSON.stringify(cards));
+                localStorage.setItem('scratchQuestSettings', JSON.stringify(settings));
+            } catch (e) { /* ignore */ }
+        }
+
+        function loadState() {
+            try {
+                const saved = localStorage.getItem('scratchQuestCards');
+                cards = saved ? JSON.parse(saved) : [...DEFAULT_CARDS];
+                const savedSettings = localStorage.getItem('scratchQuestSettings');
+                if (savedSettings) settings = JSON.parse(savedSettings);
             } catch (e) { /* ignore */ }
         }
 
@@ -1177,29 +1143,12 @@
             } catch (e) { /* ignore */ }
         }
 
-        // ── HELPERS ──
-        function getFilteredCards() {
-            if (selectedCategory === 'All') return cards.slice();
-            return cards.filter(c => c.category === selectedCategory);
+        function getCardCount(cat) {
+            return cards.filter(c => c.category === cat).length;
         }
 
-        function getCardCount(category) {
-            if (category === 'All') return cards.length;
-            return cards.filter(c => c.category === category).length;
-        }
-
-        function getRandomCardFromCategory(category) {
-            let pool = category === 'All' ? cards : cards.filter(c => c.category === category);
-            if (category === 'Truth or Dare') {
-                const special = pool.find(c => c.isTruthDare === true);
-                if (special) return special;
-            }
-            if (pool.length === 0) return null;
-            return pool[Math.floor(Math.random() * pool.length)];
-        }
-
-        function getNextCard() {
-            const pool = getFilteredCards();
+        function getRandomCard(cat) {
+            const pool = cat ? cards.filter(c => c.category === cat) : cards;
             if (pool.length === 0) return null;
             if (pool.length === 1) return pool[0];
             const filtered = pool.filter(c => c.id !== (currentCard ? currentCard.id : ''));
@@ -1269,522 +1218,324 @@
             const catsHtml = categories.map(c => {
                 const count = getCardCount(c);
                 const icon = getCategoryIcon(c);
-                const isTD = c === 'Truth or Dare';
-                const activeClass = selectedCategory === c ? 'active' : '';
-                const tdClass = isTD ? 'truthdare-card' : '';
+                const isTruthDare = c === 'Truth or Dare';
                 return `
-                    <div class="cat-card ${activeClass} ${tdClass}" data-cat="${c}">
+                    <div class="cat-card${count === 0 ? ' disabled' : ''}${isTruthDare ? ' truthdare-card' : ''}" onclick="selectCategory('${c}'); navigate('play');">
                         <span class="cat-icon"><i class="fas ${icon}"></i></span>
                         <span class="cat-name">${c}</span>
-                        <span class="cat-count">${count} cards</span>
-                        ${isTD ? '<span class="cat-badge">🎲</span>' : ''}
+                        <span class="cat-count">${count}</span>
+                        ${count > 0 ? `<span class="cat-badge">${count}</span>` : ''}
                     </div>
                 `;
             }).join('');
 
             return `
-                <div class="page active">
-                    <section class="hero">
-                        <h1>Scratch Quest</h1>
-                        <p>Pick a category to spin a random card and start scratching!</p>
-                    </section>
-                    <section>
-                        <div class="section-title"><i class="fas fa-th-large"></i> Categories</div>
-                        <div class="categories-grid">
-                            <div class="cat-card ${selectedCategory === 'All' ? 'active' : ''}" data-cat="All">
-                                <span class="cat-icon"><i class="fas fa-layer-group"></i></span>
-                                <span class="cat-name">All</span>
-                                <span class="cat-count">${allCount} cards</span>
-                            </div>
-                            ${catsHtml}
-                        </div>
-                        <p style="color: var(--text-secondary); font-size:0.9rem; margin-top: 4px;">
-                            <i class="fas fa-info-circle"></i> Click a category card to spin a random card from it.
-                        </p>
-                    </section>
-                    <section class="random-section">
-                        <button class="btn btn-outline" id="randomCardBtn"><i class="fas fa-dice"></i> Random Card</button>
-                        <span style="color: var(--text-secondary); font-size:0.9rem;">
-                            ${getFilteredCards().length} cards in <strong>${selectedCategory}</strong>
-                        </span>
-                    </section>
-                    <section class="about-text">
-                        <div class="section-title"><i class="fas fa-heart"></i> About</div>
-                        <p>Scratch Quest brings you romantic challenges, date ideas, compliments, conversation starters, and fun challenges.</p>
-                        <p style="margin-top:12px;">
-                            <i class="fas fa-dice" style="color:var(--accent);"></i>
-                            <strong>Truth or Dare</strong> – scratch the card to reveal the choice screen!
-                        </p>
-                        <p style="margin-top:8px; font-size:0.85rem;">
-                            💡 Your custom cards are saved in your browser.
-                        </p>
-                    </section>
+                <div class="hero">
+                    <h1>🎲 Scratch Quest</h1>
+                    <p>Reveal romantic surprises, exciting dares, and fun challenges</p>
+                </div>
+                <div class="categories-grid">
+                    ${catsHtml}
+                </div>
+                <div class="random-section" style="justify-content: center;">
+                    <button class="btn" onclick="selectCategory(null); navigate('play');">🎯 Random Card</button>
+                </div>
+                <div style="text-align: center; margin-top: 30px;">
+                    <p class="about-text" style="margin: 0 auto;">
+                        Scratch off the cards to reveal hidden messages, romantic ideas, fun challenges, and truth or dare questions. Perfect for couples looking to deepen their connection and have fun together!
+                    </p>
                 </div>
             `;
         }
 
         // ── PLAY ──
+        function selectCategory(cat) {
+            selectedCategory = cat;
+            if (!cat) {
+                currentCard = getRandomCard();
+            } else {
+                currentCard = getRandomCard(cat);
+            }
+        }
+
         function renderPlay() {
-            const pool = getFilteredCards();
-            if (pool.length === 0) {
-                return `
-                    <div class="page active">
-                        <div style="text-align:center; padding:60px 20px;">
-                            <i class="fas fa-inbox" style="font-size:3rem; color:var(--text-secondary);"></i>
-                            <h3 style="margin-top:16px;">No cards in this category</h3>
-                            <p style="color:var(--text-secondary);">Try a different category or add your own!</p>
-                            <button class="btn" style="margin-top:16px;" onclick="navigate('customize')">
-                                <i class="fas fa-plus"></i> Add Custom Card
-                            </button>
+            if (!currentCard) {
+                selectCategory(null);
+                if (!currentCard) {
+                    return `<div style="text-align:center; padding:40px;"><p>No cards available</p><button class="btn" onclick="navigate('home');">← Back</button></div>`;
+                }
+            }
+
+            // Handle Truth or Dare
+            if (currentCard.isTruthDare) {
+                if (tdState === 'choice') {
+                    return `
+                        <div class="td-container">
+                            <div class="td-header">
+                                <div class="td-icon">🎲</div>
+                                <h2>Truth or Dare?</h2>
+                                <p>Pick one and reveal your challenge</p>
+                            </div>
+                            <div class="td-choice-grid">
+                                <button class="td-choice-btn truth-btn" onclick="pickTruthOrDare('truth');">
+                                    <i class="fas fa-heart"></i>
+                                    Truth
+                                </button>
+                                <button class="td-choice-btn dare-btn" onclick="pickTruthOrDare('dare');">
+                                    <i class="fas fa-fire"></i>
+                                    Dare
+                                </button>
+                            </div>
+                            <button class="btn btn-outline" style="margin-top:20px;" onclick="selectCategory(null); render();">🔄 New Card</button>
                         </div>
-                    </div>
-                `;
-            }
-            if (!currentCard || !pool.some(c => c.id === currentCard.id)) {
-                currentCard = pool[Math.floor(Math.random() * pool.length)];
-                // reset reveal state for new card
-                isTdRevealed = false;
-                tdState = 'choice';
-                currentQuestion = '';
+                    `;
+                } else if (tdState === 'revealed') {
+                    const isTrue = currentQuestion.startsWith('🎯');
+                    const label = currentQuestion.includes('Truth') ? 'TRUTH' : 'DARE';
+                    const question = currentQuestion.replace('🎯 ', '');
+                    return `
+                        <div class="td-container">
+                            <div class="td-question-box">
+                                <div class="q-label ${isTrue ? 'truth-label' : 'dare-label'}">${label}</div>
+                                <div class="q-text">${question}</div>
+                                <div class="q-actions">
+                                    <button class="btn btn-success" onclick="pickTruthOrDare('truth');">Next Truth</button>
+                                    <button class="btn btn-danger" onclick="pickTruthOrDare('dare');">Next Dare</button>
+                                    <button class="btn btn-outline" style="flex: 0;" onclick="selectCategory(null); render();">🔄 New Card</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
             }
 
-            // If this is a Truth or Dare card and it's already revealed, show the choice UI
-            if (currentCard.isTruthDare && isTdRevealed) {
-                return renderTruthDare();
-            }
-
-            // Otherwise, show the scratch card (for both normal and TruthDare before reveal)
-            isRevealed = false;
-            const msg = currentCard.isTruthDare ? 'Scratch to reveal Truth or Dare' : (currentCard.hiddenMessage || '💕 No message set');
+            // Handle regular scratch cards
             return `
-                <div class="page active">
-                    <div class="scratch-container">
-                        <div class="canvas-wrapper">
-                            <canvas id="scratchCanvas" width="500" height="500"></canvas>
-                        </div>
-                        <div class="card-info">
-                            <div class="card-category"><i class="fas ${getCategoryIcon(currentCard.category)}"></i> ${currentCard.category}</div>
-                            <div class="card-title">${currentCard.title}</div>
-                            <div class="revealed-message" id="revealedMessage">${msg}</div>
-                        </div>
-                        <div class="play-controls">
-                            <button class="btn" id="nextCardBtn"><i class="fas fa-arrow-right"></i> Next Card</button>
-                            <button class="btn btn-outline btn-sm" id="resetCardBtn"><i class="fas fa-undo"></i> Reset</button>
-                        </div>
-                        <div style="margin-top:8px; font-size:0.8rem; color:var(--text-secondary);">
-                            <i class="fas fa-info-circle"></i> Scratch the card to reveal the message
-                        </div>
+                <div class="scratch-container">
+                    <div class="canvas-wrapper">
+                        <canvas id="scratchCanvas" width="400" height="400"></canvas>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-category">${currentCard.category}</div>
+                        <div class="card-title">${currentCard.title}</div>
+                        <div class="revealed-message" id="revealedMessage">${currentCard.hiddenMessage}</div>
+                    </div>
+                    <div class="play-controls">
+                        <button class="btn" onclick="selectCategory(null); render();">🔄 New Card</button>
+                        <button class="btn btn-outline" onclick="navigate('home');">← Home</button>
                     </div>
                 </div>
             `;
         }
 
-        // ── TRUTH OR DARE UI ──
-        function renderTruthDare() {
-            let content = '';
-
-            if (tdState === 'choice') {
-                content = `
-                    <div class="td-header">
-                        <div class="td-icon">🎲</div>
-                        <h2>Truth or Dare</h2>
-                        <p>Scratch the card then pick your challenge!</p>
-                    </div>
-                    <div class="td-choice-grid">
-                        <button class="td-choice-btn truth-btn" id="tdTruthBtn">
-                            <i class="fas fa-user"></i>
-                            <span>Truth</span>
-                        </button>
-                        <button class="td-choice-btn dare-btn" id="tdDareBtn">
-                            <i class="fas fa-bolt"></i>
-                            <span>Dare</span>
-                        </button>
-                    </div>
-                    <div style="margin-top:8px; font-size:0.8rem; color:var(--text-secondary);">
-                        <i class="fas fa-info-circle"></i> Choose Truth or Dare to reveal your question
-                    </div>
-                `;
+        function pickTruthOrDare(choice) {
+            if (choice === 'truth') {
+                currentQuestion = '🎯 Truth: ' + getRandomTruth();
             } else {
-                const isTruth = tdState === 'truth';
-                const label = isTruth ? 'TRUTH' : 'DARE';
-                const labelClass = isTruth ? 'truth-label' : 'dare-label';
-                const icon = isTruth ? 'fa-user' : 'fa-bolt';
-                const color = isTruth ? 'var(--truth-color)' : 'var(--dare-color)';
-                const question = currentQuestion || (isTruth ? getRandomTruth() : getRandomDare());
-
-                content = `
-                    <div class="td-question-box">
-                        <div class="q-label ${labelClass}">
-                            <i class="fas ${icon}"></i> ${label}
-                        </div>
-                        <div class="q-text">${question}</div>
-                        <div class="q-actions">
-                            <button class="btn btn-sm" id="tdNewQuestionBtn" style="background:${color}; color:#1a1a2e;">
-                                <i class="fas fa-redo"></i> New ${label}
-                            </button>
-                            <button class="btn btn-outline btn-sm" id="tdBackBtn">
-                                <i class="fas fa-arrow-left"></i> Back
-                            </button>
-                        </div>
-                    </div>
-                    <div style="margin-top:12px; font-size:0.8rem; color:var(--text-secondary);">
-                        <i class="fas fa-info-circle"></i> Get a new question or go back to choose again
-                    </div>
-                `;
+                currentQuestion = '🎯 Dare: ' + getRandomDare();
             }
-
-            return `
-                <div class="page active">
-                    <div class="td-container">
-                        ${content}
-                        <div class="play-controls" style="margin-top:8px;">
-                            <button class="btn" id="nextCardBtn"><i class="fas fa-arrow-right"></i> Next Card</button>
-                            <button class="btn btn-outline btn-sm" id="resetCardBtn"><i class="fas fa-undo"></i> Reset</button>
-                        </div>
-                    </div>
-                </div>
-            `;
+            tdState = 'revealed';
+            isTdRevealed = true;
+            render();
         }
 
         // ── CUSTOMIZE ──
         function renderCustomize() {
-            const customCards = cards.filter(c => c.isCustom);
-            const categoryOptions = categories.map(c =>
-                `<option value="${c}">${c}</option>`
-            ).join('');
+            const customCards = cards.filter(c => c.dateCreated);
+            const createdCards = customCards.filter(c => c.id && c.id.length > 2);
 
-            let listHtml = '';
-            if (customCards.length === 0) {
-                listHtml = `<div class="empty-custom">✨ No custom cards yet. Create one below!</div>`;
-            } else {
-                listHtml = customCards.map(c => `
-                    <div class="custom-card-item" data-id="${c.id}">
+            let cardsHtml = '';
+            if (createdCards.length > 0) {
+                cardsHtml = createdCards.map(c => `
+                    <div class="custom-card-item">
                         <div class="thumb">
-                            ${c.image ? `<img src="${c.image}" alt="${c.title}" />` :
-                            `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--bg-input);color:var(--text-secondary);font-size:1.5rem;">❤️</div>`}
+                            ${c.image && c.image.trim() !== '' ? `<img src="${c.image}" alt="${c.title}">` : '<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:#333;">📋</div>'}
                         </div>
                         <div class="info">
                             <div class="title">${c.title}</div>
-                            <div class="msg">${c.hiddenMessage || 'No message'}</div>
-                            <div class="cat"><i class="fas ${getCategoryIcon(c.category)}"></i> ${c.category}</div>
+                            <div class="msg">${c.hiddenMessage}</div>
+                            <div class="cat">${c.category}</div>
                         </div>
                         <div class="actions">
-                            <button class="play-btn" data-id="${c.id}" title="Play this card"><i class="fas fa-play"></i></button>
-                            <button class="delete" data-id="${c.id}" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                            <button class="play-btn" data-id="${c.id}" title="Play"><i class="fas fa-play"></i></button>
+                            <button class="delete" data-id="${c.id}" title="Delete"><i class="fas fa-trash"></i></button>
                         </div>
                     </div>
                 `).join('');
+            } else {
+                cardsHtml = '<div class="empty-custom">No custom cards yet. Create one below!</div>';
             }
 
             return `
-                <div class="page active">
-                    <div class="section-title"><i class="fas fa-pen-fancy"></i> Customize</div>
-                    <p style="color:var(--text-secondary); margin-bottom:20px;">
-                        Upload your own images and write secret messages to create personalised scratch cards.
-                    </p>
-
-                    <div class="card">
-                        <h3 style="margin-bottom:16px;"><i class="fas fa-plus-circle" style="color:var(--accent);"></i> Create New Card</h3>
-                        <div class="creator-grid">
-                            <div>
-                                <div class="form-group">
-                                    <label>Card Title *</label>
-                                    <input type="text" id="customTitle" placeholder="e.g. Our Favourite Place" maxlength="60" />
-                                </div>
-                                <div class="form-group">
-                                    <label>Category *</label>
-                                    <select id="customCategory">${categoryOptions}</select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Secret Message *</label>
-                                    <textarea id="customMessage" placeholder="Write the message that appears when scratched..." rows="3"></textarea>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="form-group">
-                                    <label>Upload Image</label>
-                                    <input type="file" id="customImageInput" accept="image/*" />
-                                    <div class="image-preview" id="imagePreview">
-                                        <div class="placeholder"><i class="fas fa-image" style="font-size:2rem;display:block;margin-bottom:6px;"></i>No image selected</div>
-                                    </div>
-                                </div>
-                                <button class="btn btn-success" id="addCustomCardBtn" style="width:100%;">
-                                    <i class="fas fa-plus"></i> Add Card
-                                </button>
+                <div class="card">
+                    <h2 class="section-title"><i class="fas fa-plus-circle"></i> Create Custom Card</h2>
+                    <div class="creator-grid">
+                        <div class="form-group">
+                            <label>Card Title</label>
+                            <input type="text" id="customTitle" placeholder="e.g., Sunset Dinner">
+                        </div>
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select id="customCategory">
+                                ${categories.map(c => `<option value="${c}">${c}</option>`).join('')}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Hidden Message</label>
+                            <textarea id="customMessage" placeholder="What should be revealed when scratched?"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Difficulty</label>
+                            <select id="customDifficulty">
+                                <option value="easy">Easy</option>
+                                <option value="medium">Medium</option>
+                                <option value="hard">Hard</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="grid-column: 1 / -1;">
+                            <label>Card Image (Optional)</label>
+                            <input type="file" id="customImage" accept="image/*">
+                            <div class="image-preview" id="imagePreview">
+                                <div class="placeholder">No image selected</div>
                             </div>
                         </div>
                     </div>
-
-                    <div style="margin-top:28px;">
-                        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
-                            <h3><i class="fas fa-list" style="color:var(--accent);"></i> Your Custom Cards (${customCards.length})</h3>
-                            ${customCards.length > 0 ? `<button class="btn btn-danger btn-sm" id="clearCustomBtn"><i class="fas fa-trash"></i> Clear All</button>` : ''}
-                        </div>
-                        <div class="custom-card-list">${listHtml}</div>
-                    </div>
-
-                    <div style="margin-top:20px; padding:16px; background:var(--bg-card); border-radius:12px; font-size:0.85rem; color:var(--text-secondary);">
-                        <i class="fas fa-info-circle"></i>
-                        Your custom cards are saved in your browser and will appear alongside the default cards.
-                        <span class="badge" style="margin-left:8px;">saved locally</span>
-                    </div>
+                    <button class="btn" onclick="addCustomCard()" style="width:100%; margin-top:20px;">✨ Create Card</button>
+                </div>
+                <div class="card" style="margin-top: 30px;">
+                    <h2 class="section-title"><i class="fas fa-cards"></i> Your Custom Cards</h2>
+                    <div class="custom-card-list">${cardsHtml}</div>
                 </div>
             `;
         }
 
+        function addCustomCard() {
+            const title = document.getElementById('customTitle').value.trim();
+            const category = document.getElementById('customCategory').value;
+            const message = document.getElementById('customMessage').value.trim();
+            const difficulty = document.getElementById('customDifficulty').value;
+            const imageFile = document.getElementById('customImage').files[0];
+
+            if (!title || !message) {
+                alert('Please fill in the title and message.');
+                return;
+            }
+
+            let imageUrl = '';
+            if (imageFile) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imageUrl = e.target.result;
+                    const newCard = {
+                        id: generateId(),
+                        title: title,
+                        category: category,
+                        hiddenMessage: message,
+                        difficulty: difficulty,
+                        image: imageUrl,
+                        dateCreated: Date.now()
+                    };
+                    cards.push(newCard);
+                    saveState();
+                    document.getElementById('customTitle').value = '';
+                    document.getElementById('customMessage').value = '';
+                    document.getElementById('customImage').value = '';
+                    document.getElementById('imagePreview').innerHTML = '<div class="placeholder">No image selected</div>';
+                    render();
+                    attachCustomEvents();
+                };
+                reader.readAsDataURL(imageFile);
+            } else {
+                const newCard = {
+                    id: generateId(),
+                    title: title,
+                    category: category,
+                    hiddenMessage: message,
+                    difficulty: difficulty,
+                    image: '',
+                    dateCreated: Date.now()
+                };
+                cards.push(newCard);
+                saveState();
+                document.getElementById('customTitle').value = '';
+                document.getElementById('customMessage').value = '';
+                document.getElementById('customImage').value = '';
+                document.getElementById('imagePreview').innerHTML = '<div class="placeholder">No image selected</div>';
+                render();
+                attachCustomEvents();
+            }
+        }
+
+        document.addEventListener('change', function(e) {
+            if (e.target.id === 'customImage') {
+                const file = e.target.files[0];
+                const preview = document.getElementById('imagePreview');
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        preview.innerHTML = `<img src="${e.target.result}" alt="preview">`;
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    preview.innerHTML = '<div class="placeholder">No image selected</div>';
+                }
+            }
+        });
+
         // ── SETTINGS ──
         function renderSettings() {
-            const themeIcon = settings.theme === 'dark' ? 'fa-moon' : 'fa-sun';
-            const soundIcon = settings.sound ? 'fa-volume-up' : 'fa-volume-mute';
-            const totalCards = cards.length;
-            const customCount = cards.filter(c => c.isCustom).length;
             return `
-                <div class="page active">
-                    <div class="section-title"><i class="fas fa-cog"></i> Settings</div>
-                    <div class="settings-group card">
+                <div class="card">
+                    <h2 class="section-title"><i class="fas fa-cog"></i> Settings</h2>
+                    <div class="settings-group">
                         <div class="setting-item">
-                            <span><i class="fas ${themeIcon}"></i> Theme</span>
-                            <div class="toggle ${settings.theme === 'light' ? 'active' : ''}" id="themeToggle"></div>
+                            <span>Dark Mode</span>
+                            <div class="toggle${settings.theme === 'dark' ? ' active' : ''}" onclick="toggleSetting('theme')"></div>
                         </div>
                         <div class="setting-item">
-                            <span><i class="fas ${soundIcon}"></i> Sound Effects</span>
-                            <div class="toggle ${settings.sound ? 'active' : ''}" id="soundToggle"></div>
+                            <span>Sound Effects</span>
+                            <div class="toggle${settings.sound ? ' active' : ''}" onclick="toggleSetting('sound')"></div>
                         </div>
-                        <div class="setting-item" style="border-bottom:none; padding-bottom:4px;">
-                            <span><i class="fas fa-layer-group"></i> Total Cards</span>
-                            <span style="color:var(--accent);">${totalCards} <span style="color:var(--text-secondary);font-weight:400;">(${customCount} custom)</span></span>
+                        <div class="setting-item">
+                            <span>Animations</span>
+                            <div class="toggle${settings.animations ? ' active' : ''}" onclick="toggleSetting('animations')"></div>
                         </div>
-                    </div>
-                    <div style="margin-top:20px; padding:16px; background:var(--bg-card); border-radius:12px; font-size:0.8rem; color:var(--text-secondary);">
-                        <i class="fas fa-database"></i> All data is stored locally in your browser.
-                        <button class="btn btn-danger btn-sm" style="margin-top:10px;" id="resetAllBtn">
-                            <i class="fas fa-undo-alt"></i> Reset to Default Cards
-                        </button>
                     </div>
                 </div>
+                <div class="card" style="margin-top: 20px;">
+                    <h2 class="section-title"><i class="fas fa-info-circle"></i> About</h2>
+                    <p style="line-height: 1.6; color: var(--text-secondary);">
+                        <strong>Scratch Quest</strong> v1.0<br>
+                        A fun interactive game to strengthen your relationship with romantic prompts, dares, and conversation starters.<br><br>
+                        <strong>Total Cards:</strong> ${cards.length}<br>
+                        <strong>Custom Cards:</strong> ${cards.filter(c => c.id && c.id.length > 2).length}
+                    </p>
+                </div>
+                <div style="text-align: center; margin-top: 30px; padding: 20px; color: var(--text-secondary); font-size: 0.85rem;">
+                    <p>© 2026 Scratch Quest — Made with ❤️</p>
+                </div>
             `;
+        }
+
+        function toggleSetting(key) {
+            if (key === 'theme') {
+                settings.theme = settings.theme === 'dark' ? 'light' : 'dark';
+            } else if (key === 'sound') {
+                settings.sound = !settings.sound;
+            } else if (key === 'animations') {
+                settings.animations = !settings.animations;
+            }
+            saveState();
+            render();
         }
 
         // ── EVENTS ──
         function attachEvents() {
-            // Navigation
-            document.querySelectorAll('[data-nav]').forEach(el => {
-                el.onclick = (e) => { e.preventDefault();
-                    navigate(el.dataset.nav); };
-            });
-
-            // Home: category cards
-            document.querySelectorAll('.cat-card').forEach(el => {
-                el.onclick = () => {
-                    const cat = el.dataset.cat;
-                    if (!cat) return;
-                    selectedCategory = cat;
-                    const card = getRandomCardFromCategory(cat);
-                    if (card) {
-                        currentCard = card;
-                        tdState = 'choice';
-                        currentQuestion = '';
-                        isTdRevealed = false;
-                        navigate('play');
-                    } else {
-                        alert(`No cards in "${cat}" category.`);
-                    }
+            document.querySelectorAll('[data-nav]').forEach(btn => {
+                btn.onclick = (e) => {
+                    e.preventDefault();
+                    navigate(btn.dataset.nav);
                 };
-            });
-
-            // Home: random card button
-            document.getElementById('randomCardBtn')?.addEventListener('click', () => {
-                const pool = getFilteredCards();
-                if (pool.length) {
-                    currentCard = pool[Math.floor(Math.random() * pool.length)];
-                    tdState = 'choice';
-                    currentQuestion = '';
-                    isTdRevealed = false;
-                    navigate('play');
-                } else alert('No cards available in this category.');
-            });
-
-            // Settings: theme toggle
-            document.getElementById('themeToggle')?.addEventListener('click', () => {
-                settings.theme = settings.theme === 'dark' ? 'light' : 'dark';
-                saveState();
-                render();
-            });
-
-            // Settings: sound toggle
-            document.getElementById('soundToggle')?.addEventListener('click', () => {
-                settings.sound = !settings.sound;
-                saveState();
-                render();
-            });
-
-            // Settings: reset all
-            document.getElementById('resetAllBtn')?.addEventListener('click', () => {
-                if (confirm('Reset all cards to defaults? Your custom cards will be lost.')) {
-                    cards = DEFAULT_CARDS.map(c => ({ ...c }));
-                    categories = DEFAULT_CATEGORIES.slice();
-                    selectedCategory = 'All';
-                    currentCard = null;
-                    tdState = 'choice';
-                    currentQuestion = '';
-                    isTdRevealed = false;
-                    saveState();
-                    render();
-                }
-            });
-
-            // ── PLAY EVENTS ──
-            document.getElementById('nextCardBtn')?.addEventListener('click', () => {
-                const next = getNextCard();
-                if (next) {
-                    currentCard = next;
-                    tdState = 'choice';
-                    currentQuestion = '';
-                    isTdRevealed = false;
-                    navigate('play');
-                } else alert('No more cards in this category.');
-            });
-
-            document.getElementById('resetCardBtn')?.addEventListener('click', () => {
-                // Reset the current card: if it's TruthDare, go back to scratch state
-                if (currentCard && currentCard.isTruthDare) {
-                    isTdRevealed = false;
-                    tdState = 'choice';
-                    currentQuestion = '';
-                } else {
-                    // For normal cards, we just navigate to play again (re-init scratch)
-                }
-                navigate('play');
-            });
-
-            // ── TRUTH OR DARE EVENTS ──
-            document.getElementById('tdTruthBtn')?.addEventListener('click', () => {
-                tdState = 'truth';
-                currentQuestion = getRandomTruth();
-                render();
-                attachEvents();
-            });
-
-            document.getElementById('tdDareBtn')?.addEventListener('click', () => {
-                tdState = 'dare';
-                currentQuestion = getRandomDare();
-                render();
-                attachEvents();
-            });
-
-            document.getElementById('tdNewQuestionBtn')?.addEventListener('click', () => {
-                if (tdState === 'truth') {
-                    currentQuestion = getRandomTruth();
-                } else if (tdState === 'dare') {
-                    currentQuestion = getRandomDare();
-                }
-                render();
-                attachEvents();
-            });
-
-            document.getElementById('tdBackBtn')?.addEventListener('click', () => {
-                tdState = 'choice';
-                currentQuestion = '';
-                render();
-                attachEvents();
-            });
-
-            // ── CUSTOMIZE EVENTS ──
-            const fileInput = document.getElementById('customImageInput');
-            const preview = document.getElementById('imagePreview');
-            if (fileInput && preview) {
-                fileInput.addEventListener('change', (e) => {
-                    const file = e.target.files[0];
-                    if (file) {
-                        const reader = new FileReader();
-                        reader.onload = (ev) => {
-                            preview.innerHTML = `<img src="${ev.target.result}" alt="Preview" />`;
-                        };
-                        reader.readAsDataURL(file);
-                    } else {
-                        preview.innerHTML =
-                            `<div class="placeholder"><i class="fas fa-image" style="font-size:2rem;display:block;margin-bottom:6px;"></i>No image selected</div>`;
-                    }
-                });
-            }
-
-            document.getElementById('addCustomCardBtn')?.addEventListener('click', () => {
-                const title = document.getElementById('customTitle').value.trim();
-                const category = document.getElementById('customCategory').value;
-                const message = document.getElementById('customMessage').value.trim();
-                const fileInput2 = document.getElementById('customImageInput');
-                const file = fileInput2.files[0];
-
-                if (!title) { alert('Please enter a card title.'); return; }
-                if (!message) { alert('Please enter a secret message.'); return; }
-
-                const reader = new FileReader();
-                reader.onload = (ev) => {
-                    const imageData = ev.target.result;
-                    const newCard = {
-                        id: 'custom_' + generateId(),
-                        title: title,
-                        category: category,
-                        hiddenMessage: message,
-                        difficulty: 'custom',
-                        image: imageData || '',
-                        dateCreated: Date.now(),
-                        isCustom: true
-                    };
-                    cards.push(newCard);
-                    if (!categories.includes(category)) {
-                        categories.push(category);
-                    }
-                    saveState();
-                    document.getElementById('customTitle').value = '';
-                    document.getElementById('customMessage').value = '';
-                    fileInput2.value = '';
-                    if (preview) {
-                        preview.innerHTML =
-                            `<div class="placeholder"><i class="fas fa-image" style="font-size:2rem;display:block;margin-bottom:6px;"></i>No image selected</div>`;
-                    }
-                    render();
-                    attachCustomEvents();
-                };
-                if (file) {
-                    reader.readAsDataURL(file);
-                } else {
-                    const newCard = {
-                        id: 'custom_' + generateId(),
-                        title: title,
-                        category: category,
-                        hiddenMessage: message,
-                        difficulty: 'custom',
-                        image: '',
-                        dateCreated: Date.now(),
-                        isCustom: true
-                    };
-                    cards.push(newCard);
-                    if (!categories.includes(category)) {
-                        categories.push(category);
-                    }
-                    saveState();
-                    document.getElementById('customTitle').value = '';
-                    document.getElementById('customMessage').value = '';
-                    fileInput2.value = '';
-                    if (preview) {
-                        preview.innerHTML =
-                            `<div class="placeholder"><i class="fas fa-image" style="font-size:2rem;display:block;margin-bottom:6px;"></i>No image selected</div>`;
-                    }
-                    render();
-                    attachCustomEvents();
-                }
-            });
-
-            attachCustomEvents();
-
-            document.getElementById('clearCustomBtn')?.addEventListener('click', () => {
-                if (confirm('Delete ALL custom cards?')) {
-                    cards = cards.filter(c => !c.isCustom);
-                    saveState();
-                    render();
-                    attachCustomEvents();
-                }
             });
         }
 
@@ -1817,13 +1568,6 @@
                 };
             });
         }
-
-        // ── SCRATCH CANVAS ──
-        let canvas, ctx, canvasWidth, canvasHeight;
-        let isDrawing = false;
-        let revealPercent = 0;
-        let backgroundImage = null;
-        let imageLoaded = false;
 
         function initScratchCard() {
             canvas = document.getElementById('scratchCanvas');
@@ -1952,6 +1696,7 @@
             }
 
             ctx.fillStyle = '#4a3f38';
+            ctx.fillRect(0, 0, canvasWidth, canvasHeight);
             ctx.font = 'bold 28px Inter, sans-serif';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
@@ -2015,40 +1760,25 @@
             if (revealPercent > 0.40) {
                 isRevealed = true;
                 fadeOutOverlay(() => {
-                    // After fade, if it's a Truth or Dare card, set revealed and navigate
-                    if (currentCard && currentCard.isTruthDare) {
-                        isTdRevealed = true;
-                        tdState = 'choice';
-                        currentQuestion = '';
-                        // Re-render play page to show choice UI
-                        navigate('play');
-                    } else {
-                        // Normal card: show message
-                        const msgEl = document.getElementById('revealedMessage');
-                        if (msgEl) msgEl.classList.add('show');
-                        playRevealSound();
-                        canvas.style.pointerEvents = 'none';
-                    }
+                    playRevealSound();
+                    const msgEl = document.getElementById('revealedMessage');
+                    if (msgEl) msgEl.classList.add('show');
+                    canvas.style.pointerEvents = 'none';
                 });
             }
         }
 
         function fadeOutOverlay(callback) {
-            let opacity = 1.0;
+            let opacity = 1;
             const step = () => {
-                if (opacity <= 0) {
-                    ctx.globalCompositeOperation = 'destination-out';
-                    ctx.fillStyle = '#ffffff';
-                    ctx.fillRect(0, 0, canvasWidth, canvasHeight);
-                    ctx.globalCompositeOperation = 'source-over';
-                    if (callback) callback();
-                    return;
-                }
-                ctx.globalCompositeOperation = 'destination-out';
-                ctx.fillStyle = `rgba(255,255,255,${0.1})`;
-                ctx.fillRect(0, 0, canvasWidth, canvasHeight);
                 opacity -= 0.1;
-                requestAnimationFrame(step);
+                if (opacity > 0) {
+                    ctx.fillStyle = `rgba(74, 63, 56, ${opacity})`;
+                    ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+                    requestAnimationFrame(step);
+                } else {
+                    if (callback) callback();
+                }
             };
             step();
         }
