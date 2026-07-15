@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Scratch Quest – Romantic Adventure</title>
+    <title>Scratch Quest – Truth or Dare</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -28,6 +28,8 @@
             --radius: 20px;
             --transition: 0.3s ease;
             --border-subtle: rgba(255, 255, 255, 0.06);
+            --truth-color: #4fc3f7;
+            --dare-color: #ff8a65;
         }
         body.light {
             --bg-primary: #f5f3f7;
@@ -154,6 +156,24 @@
         .btn-success:hover {
             background: #27ae60;
         }
+        .btn-truth {
+            background: var(--truth-color);
+            color: #1a1a2e;
+            box-shadow: 0 4px 20px rgba(79, 195, 247, 0.4);
+        }
+        .btn-truth:hover {
+            background: #29b6f6;
+            transform: scale(1.04);
+        }
+        .btn-dare {
+            background: var(--dare-color);
+            color: #1a1a2e;
+            box-shadow: 0 4px 20px rgba(255, 138, 101, 0.4);
+        }
+        .btn-dare:hover {
+            background: #ff7043;
+            transform: scale(1.04);
+        }
 
         /* ── CARDS ── */
         .card {
@@ -194,31 +214,91 @@
             margin: 12px 0 24px;
         }
 
-        /* ── CATEGORY TAGS ── */
+        /* ── CATEGORY GRID ── */
         .categories-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 16px;
             margin: 24px 0 30px;
         }
-        .cat-tag {
-            background: var(--bg-input);
-            padding: 8px 18px;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 500;
+        .cat-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 24px 16px;
+            text-align: center;
             cursor: pointer;
             transition: all var(--transition);
-            border: 2px solid transparent;
+            border: 3px solid transparent;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
         }
-        .cat-tag:hover {
+        .cat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent 60%, rgba(255, 107, 138, 0.05));
+            pointer-events: none;
+        }
+        .cat-card:hover {
+            transform: translateY(-6px) scale(1.02);
             border-color: var(--accent);
-            transform: scale(1.05);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
         }
-        .cat-tag.active {
+        .cat-card.active {
+            border-color: var(--accent);
+            background: var(--bg-input);
+        }
+        .cat-card .cat-icon {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+            display: block;
+            color: var(--accent);
+        }
+        .cat-card .cat-name {
+            font-weight: 600;
+            font-size: 1rem;
+            display: block;
+        }
+        .cat-card .cat-count {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 4px;
+            display: block;
+        }
+        .cat-card .cat-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            font-size: 0.6rem;
             background: var(--accent);
             color: #fff;
-            border-color: var(--accent);
+            padding: 2px 10px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* Special Truth or Dare category card */
+        .cat-card.truthdare-card {
+            background: linear-gradient(135deg, rgba(79, 195, 247, 0.15), rgba(255, 138, 101, 0.15));
+            border-color: var(--truth-color);
+        }
+        .cat-card.truthdare-card .cat-icon {
+            background: linear-gradient(135deg, var(--truth-color), var(--dare-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .cat-card.truthdare-card:hover {
+            border-color: var(--dare-color);
+        }
+        .cat-card.truthdare-card.active {
+            border-color: var(--truth-color);
+            background: linear-gradient(135deg, rgba(79, 195, 247, 0.25), rgba(255, 138, 101, 0.25));
         }
 
         .random-section {
@@ -298,6 +378,122 @@
         .play-controls {
             display: flex;
             gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* ── TRUTH OR DARE UI ── */
+        .td-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            padding: 10px 0;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .td-header {
+            text-align: center;
+        }
+        .td-header .td-icon {
+            font-size: 4rem;
+            margin-bottom: 8px;
+        }
+        .td-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--truth-color), var(--dare-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .td-header p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .td-choice-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            width: 100%;
+            max-width: 400px;
+        }
+        .td-choice-btn {
+            padding: 40px 20px;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1.4rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            box-shadow: var(--shadow);
+            border: 3px solid transparent;
+        }
+        .td-choice-btn i {
+            font-size: 3rem;
+        }
+        .td-choice-btn.truth-btn {
+            border-color: var(--truth-color);
+            color: var(--truth-color);
+        }
+        .td-choice-btn.truth-btn:hover {
+            background: var(--truth-color);
+            color: #1a1a2e;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(79, 195, 247, 0.3);
+        }
+        .td-choice-btn.dare-btn {
+            border-color: var(--dare-color);
+            color: var(--dare-color);
+        }
+        .td-choice-btn.dare-btn:hover {
+            background: var(--dare-color);
+            color: #1a1a2e;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(255, 138, 101, 0.3);
+        }
+
+        .td-question-box {
+            width: 100%;
+            max-width: 450px;
+            padding: 30px 24px;
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            animation: fadeUp 0.4s ease;
+        }
+        .td-question-box .q-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .td-question-box .q-label.truth-label {
+            color: var(--truth-color);
+        }
+        .td-question-box .q-label.dare-label {
+            color: var(--dare-color);
+        }
+        .td-question-box .q-text {
+            font-size: 1.4rem;
+            font-weight: 600;
+            line-height: 1.6;
+            margin: 12px 0 20px;
+            min-height: 70px;
+        }
+        .td-question-box .q-actions {
+            display: flex;
+            gap: 12px;
             flex-wrap: wrap;
             justify-content: center;
         }
@@ -538,10 +734,37 @@
                 width: 100%;
                 justify-content: flex-end;
             }
+            .td-choice-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+            .td-choice-btn {
+                padding: 24px 12px;
+                font-size: 1.1rem;
+            }
+            .td-choice-btn i {
+                font-size: 2.2rem;
+            }
+            .td-question-box .q-text {
+                font-size: 1.1rem;
+            }
+            .categories-grid {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+                gap: 12px;
+            }
+            .cat-card {
+                padding: 16px 12px;
+            }
+            .cat-card .cat-icon {
+                font-size: 1.8rem;
+            }
+            .cat-card .cat-name {
+                font-size: 0.85rem;
+            }
         }
         @media (min-width: 768px) {
             .categories-grid {
-                gap: 16px;
+                gap: 20px;
             }
         }
 
@@ -581,8 +804,85 @@
 
     <script>
         // ═══════════════════════════════════════════════════════════════
-        //  SCRATCH QUEST – with IMAGE UPLOAD & CUSTOM TEXT
+        //  SCRATCH QUEST – with TRUTH or DARE & CATEGORY CARDS
         // ═══════════════════════════════════════════════════════════════
+
+        // ── TRUTH & DARE QUESTIONS ──
+        const TRUTH_QUESTIONS = [
+            "What's the most romantic thing you've ever done for someone?",
+            "What's your favourite memory of us together?",
+            "What's one thing you've always wanted to tell me but haven't?",
+            "What's your idea of a perfect date?",
+            "What's the most romantic song that reminds you of me?",
+            "What's your favourite thing about me?",
+            "What's one thing you'd change about our relationship?",
+            "What's your love language?",
+            "What's the most spontaneous thing you've done for love?",
+            "What's your dream vacation with me?",
+            "When did you first know you liked me?",
+            "What's the most romantic movie you've seen?",
+            "What's a secret dream you have for our future?",
+            "What's the best compliment you've ever received?",
+            "What's your favourite physical feature of mine?",
+            "What's something you've learned from our relationship?",
+            "What's your favourite date we've been on?",
+            "What would you do if you had a million dollars?",
+            "What's your biggest fear in relationships?",
+            "What's the most meaningful gift you've ever given?",
+            "What's a song that makes you think of me every time?",
+            "What's the most adventurous thing you've done for love?",
+            "What's your favourite thing about being in a relationship?",
+            "What's something you've never told anyone about yourself?",
+            "What's your idea of a perfect romantic evening?",
+            "What's the most embarrassing thing that's happened to you on a date?",
+            "What's your favourite quality in a partner?",
+            "What's a quote about love that resonates with you?",
+            "What's the most beautiful place you've ever been?",
+            "What's something you wish you could do with me right now?"
+        ];
+
+        const DARE_QUESTIONS = [
+            "Sing a love song to me right now 🎤",
+            "Do your best impression of me 😄",
+            "Dance with me for 30 seconds 💃",
+            "Tell me a cheesy pickup line 😏",
+            "Kiss me like it's the first time 💋",
+            "Write a 2-line poem about me on the spot 📝",
+            "Give me a shoulder massage 💆",
+            "Do a dramatic reading of a love poem 🎭",
+            "Serenade me with any song 🎵",
+            "Spin me around and dip me 💫",
+            "Do your best animal impression 🐱",
+            "Give me a compliment without using the word 'love' ✨",
+            "Tell me a joke that makes me laugh 😂",
+            "Do a silly walk across the room 🚶",
+            "Speak in an accent for 1 minute 🗣️",
+            "Give me a piggyback ride 🏃",
+            "Do a dramatic reenactment of our first meeting 🎬",
+            "Tell me something you've never told anyone 🤫",
+            "Do a handstand (or attempt one) 🤸",
+            "Whisper something sweet in my ear 🌙",
+            "Blindfold yourself and try to feed me a snack 🍪",
+            "Do your best celebrity impression 🌟",
+            "Make up a rap about our relationship right now 🎶",
+            "Give me a 30-second back rub 💆‍♀️",
+            "Do a silly dance for 15 seconds 💃",
+            "Make me a paper crane or origami ✂️",
+            "Tell me a secret using only gestures 🤐",
+            "Do a dramatic slow-motion walk across the room 🕴️",
+            "Give me a high-five with your eyes closed ✋",
+            "Make up a new nickname for me on the spot 🏷️"
+        ];
+
+        // ── CATEGORY ICONS ──
+        const CATEGORY_ICONS = {
+            'Romantic': 'fa-heart',
+            'Date Ideas': 'fa-calendar-heart',
+            'Compliments': 'fa-star',
+            'Conversation Starters': 'fa-comments',
+            'Fun Challenges': 'fa-gamepad',
+            'Truth or Dare': 'fa-dice'
+        };
 
         // ── DEFAULT CARD DATA ──
         const DEFAULT_CARDS = [
@@ -741,10 +1041,16 @@
                 difficulty: 'easy', image: '', dateCreated: Date.now() },
             { id: '50', title: 'Improv Story', category: 'Fun Challenges',
                 hiddenMessage: 'Take turns building a story one sentence at a time – see where it goes!',
-                difficulty: 'medium', image: '', dateCreated: Date.now() }
+                difficulty: 'medium', image: '', dateCreated: Date.now() },
+            // ── TRUTH OR DARE (special card) ──
+            { id: 'td1', title: '🎲 Truth or Dare', category: 'Truth or Dare',
+                hiddenMessage: 'Choose Truth or Dare!', difficulty: 'medium',
+                image: '', dateCreated: Date.now(), isTruthDare: true }
         ];
 
-        const DEFAULT_CATEGORIES = ['Romantic', 'Date Ideas', 'Compliments', 'Conversation Starters', 'Fun Challenges'];
+        const DEFAULT_CATEGORIES = ['Romantic', 'Date Ideas', 'Compliments', 'Conversation Starters', 'Fun Challenges',
+            'Truth or Dare'
+        ];
 
         // ── STATE ──
         let cards = [];
@@ -754,6 +1060,10 @@
         let currentCard = null;
         let isRevealed = false;
         let currentPage = 'home';
+
+        // Truth or Dare state
+        let tdState = 'choice'; // 'choice' | 'truth' | 'dare'
+        let currentQuestion = '';
 
         // ── Load from localStorage ──
         function loadState() {
@@ -765,14 +1075,44 @@
                     categories = parsed.categories || DEFAULT_CATEGORIES.slice();
                     settings = parsed.settings || { theme: 'dark', sound: true };
                     selectedCategory = parsed.selectedCategory || 'All';
-                    return;
                 } catch (e) { /* ignore */ }
+            } else {
+                cards = DEFAULT_CARDS.map(c => ({ ...c }));
+                categories = DEFAULT_CATEGORIES.slice();
+                settings = { theme: 'dark', sound: true };
+                selectedCategory = 'All';
             }
-            // Fallback to defaults
-            cards = DEFAULT_CARDS.map(c => ({ ...c }));
-            categories = DEFAULT_CATEGORIES.slice();
-            settings = { theme: 'dark', sound: true };
-            selectedCategory = 'All';
+
+            // ── ALWAYS ensure Truth or Dare category and card exist ──
+            if (!categories.includes('Truth or Dare')) {
+                categories.push('Truth or Dare');
+            }
+
+            // Remove any duplicate Truth or Dare cards, keep only the special one
+            const tdCards = cards.filter(c => c.category === 'Truth or Dare');
+            if (tdCards.length > 1) {
+                // Keep only the one with isTruthDare: true
+                cards = cards.filter(c => c.category !== 'Truth or Dare' || c.isTruthDare === true);
+                // If none had isTruthDare: true, add the default one
+                if (!cards.some(c => c.isTruthDare === true)) {
+                    const tdCard = DEFAULT_CARDS.find(c => c.isTruthDare);
+                    if (tdCard) cards.push({ ...tdCard, dateCreated: Date.now() });
+                }
+            } else if (tdCards.length === 1 && !tdCards[0].isTruthDare) {
+                // The single card doesn't have the flag - replace it
+                cards = cards.filter(c => c.category !== 'Truth or Dare');
+                const tdCard = DEFAULT_CARDS.find(c => c.isTruthDare);
+                if (tdCard) cards.push({ ...tdCard, dateCreated: Date.now() });
+            } else if (tdCards.length === 0) {
+                // No Truth or Dare card at all
+                const tdCard = DEFAULT_CARDS.find(c => c.isTruthDare);
+                if (tdCard) cards.push({ ...tdCard, dateCreated: Date.now() });
+            }
+
+            // Ensure selectedCategory is valid
+            if (!categories.includes(selectedCategory) && selectedCategory !== 'All') {
+                selectedCategory = 'All';
+            }
         }
 
         function saveState() {
@@ -845,8 +1185,18 @@
             return cards.filter(c => c.category === selectedCategory);
         }
 
+        function getCardCount(category) {
+            if (category === 'All') return cards.length;
+            return cards.filter(c => c.category === category).length;
+        }
+
         function getRandomCardFromCategory(category) {
-            const pool = category === 'All' ? cards : cards.filter(c => c.category === category);
+            let pool = category === 'All' ? cards : cards.filter(c => c.category === category);
+            // If category is 'Truth or Dare', prefer the special card
+            if (category === 'Truth or Dare') {
+                const special = pool.find(c => c.isTruthDare === true);
+                if (special) return special;
+            }
             if (pool.length === 0) return null;
             return pool[Math.floor(Math.random() * pool.length)];
         }
@@ -864,9 +1214,25 @@
             return Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
         }
 
+        function getRandomTruth() {
+            return TRUTH_QUESTIONS[Math.floor(Math.random() * TRUTH_QUESTIONS.length)];
+        }
+
+        function getRandomDare() {
+            return DARE_QUESTIONS[Math.floor(Math.random() * DARE_QUESTIONS.length)];
+        }
+
+        function getCategoryIcon(cat) {
+            return CATEGORY_ICONS[cat] || 'fa-folder';
+        }
+
         // ── NAVIGATION ──
         function navigate(page) {
             currentPage = page;
+            if (page !== 'play') {
+                tdState = 'choice';
+                currentQuestion = '';
+            }
             render();
         }
 
@@ -892,15 +1258,31 @@
             }
             document.getElementById('app').innerHTML = html;
             attachEvents();
-            if (currentPage === 'play') initScratchCard();
+            if (currentPage === 'play' && currentCard && !currentCard.isTruthDare) {
+                initScratchCard();
+            }
             saveState();
         }
 
         // ── HOME ──
         function renderHome() {
-            const catsHtml = categories.map(c =>
-                `<span class="cat-tag ${selectedCategory === c ? 'active' : ''}" data-cat="${c}">${c}</span>`
-            ).join('');
+            const allCount = cards.length;
+            const catsHtml = categories.map(c => {
+                const count = getCardCount(c);
+                const icon = getCategoryIcon(c);
+                const isTD = c === 'Truth or Dare';
+                const activeClass = selectedCategory === c ? 'active' : '';
+                const tdClass = isTD ? 'truthdare-card' : '';
+                return `
+                    <div class="cat-card ${activeClass} ${tdClass}" data-cat="${c}">
+                        <span class="cat-icon"><i class="fas ${icon}"></i></span>
+                        <span class="cat-name">${c}</span>
+                        <span class="cat-count">${count} cards</span>
+                        ${isTD ? '<span class="cat-badge">🎲</span>' : ''}
+                    </div>
+                `;
+            }).join('');
+
             return `
                 <div class="page active">
                     <section class="hero">
@@ -908,10 +1290,17 @@
                         <p>Pick a category to spin a random card and start scratching!</p>
                     </section>
                     <section>
-                        <div class="section-title"><i class="fas fa-tags"></i> Categories</div>
-                        <div class="categories-grid">${catsHtml}</div>
+                        <div class="section-title"><i class="fas fa-th-large"></i> Categories</div>
+                        <div class="categories-grid">
+                            <div class="cat-card ${selectedCategory === 'All' ? 'active' : ''}" data-cat="All">
+                                <span class="cat-icon"><i class="fas fa-layer-group"></i></span>
+                                <span class="cat-name">All</span>
+                                <span class="cat-count">${allCount} cards</span>
+                            </div>
+                            ${catsHtml}
+                        </div>
                         <p style="color: var(--text-secondary); font-size:0.9rem; margin-top: 4px;">
-                            <i class="fas fa-info-circle"></i> Click a category to spin a random card.
+                            <i class="fas fa-info-circle"></i> Click a category card to spin a random card from it.
                         </p>
                     </section>
                     <section class="random-section">
@@ -924,8 +1313,8 @@
                         <div class="section-title"><i class="fas fa-heart"></i> About</div>
                         <p>Scratch Quest brings you romantic challenges, date ideas, compliments, conversation starters, and fun challenges.</p>
                         <p style="margin-top:12px;">
-                            <i class="fas fa-pen-fancy" style="color:var(--accent);"></i>
-                            Head to <strong>Customize</strong> to add your own pictures and secret messages!
+                            <i class="fas fa-dice" style="color:var(--accent);"></i>
+                            <strong>Truth or Dare</strong> – pick a card, then choose Truth or Dare for a surprise question!
                         </p>
                         <p style="margin-top:8px; font-size:0.85rem;">
                             💡 Your custom cards are saved in your browser.
@@ -955,6 +1344,11 @@
             if (!currentCard || !pool.some(c => c.id === currentCard.id)) {
                 currentCard = pool[Math.floor(Math.random() * pool.length)];
             }
+
+            if (currentCard.isTruthDare) {
+                return renderTruthDare();
+            }
+
             isRevealed = false;
             return `
                 <div class="page active">
@@ -963,7 +1357,7 @@
                             <canvas id="scratchCanvas" width="500" height="500"></canvas>
                         </div>
                         <div class="card-info">
-                            <div class="card-category">${currentCard.category}</div>
+                            <div class="card-category"><i class="fas ${getCategoryIcon(currentCard.category)}"></i> ${currentCard.category}</div>
                             <div class="card-title">${currentCard.title}</div>
                             <div class="revealed-message" id="revealedMessage">${currentCard.hiddenMessage || '💕 No message set'}</div>
                         </div>
@@ -973,6 +1367,73 @@
                         </div>
                         <div style="margin-top:8px; font-size:0.8rem; color:var(--text-secondary);">
                             <i class="fas fa-info-circle"></i> Scratch the card to reveal the message
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ── TRUTH OR DARE UI ──
+        function renderTruthDare() {
+            let content = '';
+
+            if (tdState === 'choice') {
+                content = `
+                    <div class="td-header">
+                        <div class="td-icon">🎲</div>
+                        <h2>Truth or Dare</h2>
+                        <p>Scratch the card then pick your challenge!</p>
+                    </div>
+                    <div class="td-choice-grid">
+                        <button class="td-choice-btn truth-btn" id="tdTruthBtn">
+                            <i class="fas fa-user"></i>
+                            <span>Truth</span>
+                        </button>
+                        <button class="td-choice-btn dare-btn" id="tdDareBtn">
+                            <i class="fas fa-bolt"></i>
+                            <span>Dare</span>
+                        </button>
+                    </div>
+                    <div style="margin-top:8px; font-size:0.8rem; color:var(--text-secondary);">
+                        <i class="fas fa-info-circle"></i> Choose Truth or Dare to reveal your question
+                    </div>
+                `;
+            } else {
+                const isTruth = tdState === 'truth';
+                const label = isTruth ? 'TRUTH' : 'DARE';
+                const labelClass = isTruth ? 'truth-label' : 'dare-label';
+                const icon = isTruth ? 'fa-user' : 'fa-bolt';
+                const color = isTruth ? 'var(--truth-color)' : 'var(--dare-color)';
+                const question = currentQuestion || (isTruth ? getRandomTruth() : getRandomDare());
+
+                content = `
+                    <div class="td-question-box">
+                        <div class="q-label ${labelClass}">
+                            <i class="fas ${icon}"></i> ${label}
+                        </div>
+                        <div class="q-text">${question}</div>
+                        <div class="q-actions">
+                            <button class="btn btn-sm" id="tdNewQuestionBtn" style="background:${color}; color:#1a1a2e;">
+                                <i class="fas fa-redo"></i> New ${label}
+                            </button>
+                            <button class="btn btn-outline btn-sm" id="tdBackBtn">
+                                <i class="fas fa-arrow-left"></i> Back
+                            </button>
+                        </div>
+                    </div>
+                    <div style="margin-top:12px; font-size:0.8rem; color:var(--text-secondary);">
+                        <i class="fas fa-info-circle"></i> Get a new question or go back to choose again
+                    </div>
+                `;
+            }
+
+            return `
+                <div class="page active">
+                    <div class="td-container">
+                        ${content}
+                        <div class="play-controls" style="margin-top:8px;">
+                            <button class="btn" id="nextCardBtn"><i class="fas fa-arrow-right"></i> Next Card</button>
+                            <button class="btn btn-outline btn-sm" id="resetCardBtn"><i class="fas fa-undo"></i> Reset</button>
                         </div>
                     </div>
                 </div>
@@ -999,7 +1460,7 @@
                         <div class="info">
                             <div class="title">${c.title}</div>
                             <div class="msg">${c.hiddenMessage || 'No message'}</div>
-                            <div class="cat">${c.category}</div>
+                            <div class="cat"><i class="fas ${getCategoryIcon(c.category)}"></i> ${c.category}</div>
                         </div>
                         <div class="actions">
                             <button class="play-btn" data-id="${c.id}" title="Play this card"><i class="fas fa-play"></i></button>
@@ -1106,22 +1567,33 @@
                     navigate(el.dataset.nav); };
             });
 
-            // Home: random card
-            document.getElementById('randomCardBtn')?.addEventListener('click', () => {
-                const pool = getFilteredCards();
-                if (pool.length) { currentCard = pool[Math.floor(Math.random() * pool.length)];
-                    navigate('play'); } else alert('No cards available in this category.');
-            });
-
-            // Home: category tags
-            document.querySelectorAll('.cat-tag').forEach(el => {
+            // Home: category cards
+            document.querySelectorAll('.cat-card').forEach(el => {
                 el.onclick = () => {
                     const cat = el.dataset.cat;
+                    if (!cat) return;
                     selectedCategory = cat;
                     const card = getRandomCardFromCategory(cat);
-                    if (card) { currentCard = card;
-                        navigate('play'); } else alert(`No cards in "${cat}" category.`);
+                    if (card) {
+                        currentCard = card;
+                        tdState = 'choice';
+                        currentQuestion = '';
+                        navigate('play');
+                    } else {
+                        alert(`No cards in "${cat}" category.`);
+                    }
                 };
+            });
+
+            // Home: random card button
+            document.getElementById('randomCardBtn')?.addEventListener('click', () => {
+                const pool = getFilteredCards();
+                if (pool.length) {
+                    currentCard = pool[Math.floor(Math.random() * pool.length)];
+                    tdState = 'choice';
+                    currentQuestion = '';
+                    navigate('play');
+                } else alert('No cards available in this category.');
             });
 
             // Settings: theme toggle
@@ -1145,24 +1617,63 @@
                     categories = DEFAULT_CATEGORIES.slice();
                     selectedCategory = 'All';
                     currentCard = null;
+                    tdState = 'choice';
+                    currentQuestion = '';
                     saveState();
                     render();
                 }
             });
 
-            // Play: next card
+            // ── PLAY EVENTS ──
             document.getElementById('nextCardBtn')?.addEventListener('click', () => {
                 const next = getNextCard();
-                if (next) { currentCard = next;
-                    navigate('play'); } else alert('No more cards in this category.');
+                if (next) {
+                    currentCard = next;
+                    tdState = 'choice';
+                    currentQuestion = '';
+                    navigate('play');
+                } else alert('No more cards in this category.');
             });
 
-            // Play: reset
-            document.getElementById('resetCardBtn')?.addEventListener('click', () => navigate('play'));
+            document.getElementById('resetCardBtn')?.addEventListener('click', () => {
+                tdState = 'choice';
+                currentQuestion = '';
+                navigate('play');
+            });
+
+            // ── TRUTH OR DARE EVENTS ──
+            document.getElementById('tdTruthBtn')?.addEventListener('click', () => {
+                tdState = 'truth';
+                currentQuestion = getRandomTruth();
+                render();
+                attachEvents();
+            });
+
+            document.getElementById('tdDareBtn')?.addEventListener('click', () => {
+                tdState = 'dare';
+                currentQuestion = getRandomDare();
+                render();
+                attachEvents();
+            });
+
+            document.getElementById('tdNewQuestionBtn')?.addEventListener('click', () => {
+                if (tdState === 'truth') {
+                    currentQuestion = getRandomTruth();
+                } else if (tdState === 'dare') {
+                    currentQuestion = getRandomDare();
+                }
+                render();
+                attachEvents();
+            });
+
+            document.getElementById('tdBackBtn')?.addEventListener('click', () => {
+                tdState = 'choice';
+                currentQuestion = '';
+                render();
+                attachEvents();
+            });
 
             // ── CUSTOMIZE EVENTS ──
-
-            // Image preview
             const fileInput = document.getElementById('customImageInput');
             const preview = document.getElementById('imagePreview');
             if (fileInput && preview) {
@@ -1181,7 +1692,6 @@
                 });
             }
 
-            // Add custom card
             document.getElementById('addCustomCardBtn')?.addEventListener('click', () => {
                 const title = document.getElementById('customTitle').value.trim();
                 const category = document.getElementById('customCategory').value;
@@ -1210,7 +1720,6 @@
                         categories.push(category);
                     }
                     saveState();
-                    // Clear form
                     document.getElementById('customTitle').value = '';
                     document.getElementById('customMessage').value = '';
                     fileInput2.value = '';
@@ -1219,13 +1728,11 @@
                             `<div class="placeholder"><i class="fas fa-image" style="font-size:2rem;display:block;margin-bottom:6px;"></i>No image selected</div>`;
                     }
                     render();
-                    // Re-attach custom events after render
                     attachCustomEvents();
                 };
                 if (file) {
                     reader.readAsDataURL(file);
                 } else {
-                    // No image, just add the card
                     const newCard = {
                         id: 'custom_' + generateId(),
                         title: title,
@@ -1253,10 +1760,8 @@
                 }
             });
 
-            // Custom card actions (play & delete) - attached after render
             attachCustomEvents();
 
-            // Clear all custom
             document.getElementById('clearCustomBtn')?.addEventListener('click', () => {
                 if (confirm('Delete ALL custom cards?')) {
                     cards = cards.filter(c => !c.isCustom);
@@ -1267,15 +1772,19 @@
             });
         }
 
-        // ── CUSTOM CARD EVENTS (re-attach after re-render) ──
+        // ── CUSTOM CARD EVENTS ──
         function attachCustomEvents() {
             document.querySelectorAll('.custom-card-item .play-btn').forEach(btn => {
                 btn.onclick = (e) => {
                     e.stopPropagation();
                     const id = btn.dataset.id;
                     const card = cards.find(c => c.id === id);
-                    if (card) { currentCard = card;
-                        navigate('play'); }
+                    if (card) {
+                        currentCard = card;
+                        tdState = 'choice';
+                        currentQuestion = '';
+                        navigate('play');
+                    }
                 };
             });
             document.querySelectorAll('.custom-card-item .delete').forEach(btn => {
@@ -1384,12 +1893,10 @@
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
                 ctx.fillText('❤️', canvasWidth / 2, canvasHeight / 2);
-                // Fallback overlay
                 ctx.fillStyle = 'rgba(255,107,138,0.15)';
                 ctx.fillRect(0, 0, canvasWidth, canvasHeight);
             }
 
-            // ── Scratch overlay ──
             ctx.globalCompositeOperation = 'source-over';
             const overlayGrad = ctx.createLinearGradient(0, 0, canvasWidth, canvasHeight);
             overlayGrad.addColorStop(0, '#b8b0a8');
@@ -1399,7 +1906,6 @@
             ctx.fillStyle = overlayGrad;
             ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
-            // Texture noise
             for (let i = 0; i < 1500; i++) {
                 const x = Math.random() * canvasWidth;
                 const y = Math.random() * canvasHeight;
